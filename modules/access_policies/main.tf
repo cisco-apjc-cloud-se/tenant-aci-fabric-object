@@ -7,3 +7,21 @@ terraform {
   }
   experiments = [module_variable_optional_attrs]
 }
+
+locals {}
+
+### ACI Fabric Access Policy - Pools Module ###
+module "pools" {
+  source = "./modules/pools"
+
+  ### Variables ###
+  pools = var.access_policies.pools
+}
+
+### ACI Fabric Access Policy - Policies Module ###
+module "policies" {
+  source = "./modules/policies"
+
+  ### Variables ###
+  policies = var.access_policies.policies
+}

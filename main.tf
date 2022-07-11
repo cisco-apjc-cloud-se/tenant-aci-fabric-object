@@ -14,6 +14,7 @@ module "fabric_policies" {
   source = "./modules/fabric_policies"
 
   ### Variables ###
+  fabric_policies = var.fabric.fabric_policies
 }
 
 ### Fabric Access Policies Module ###
@@ -21,4 +22,5 @@ module "access_policies" {
   source = "./modules/access_policies"
 
   ### Variables ###
+  access_policies = var.fabric.access_policies
 }
