@@ -7,3 +7,11 @@ terraform {
   }
   experiments = [module_variable_optional_attrs]
 }
+
+/*
+NOTE: Supported Policies Objects in Terraform
+- Fabric -> Access Policies -> Switches -> Leaf -> Profiles -> Leaf Profile == aci_leaf_profile
+
+NO Terraform support for:
+-
+*/

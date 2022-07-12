@@ -27,3 +27,12 @@ module "vlan_pool" {
   ### Variables ###
   vlan_pool = each.value
 }
+
+### ACI Fabric Access Policy - VSAN Pool Module ###
+module "vsan_pool" {
+  for_each = var.pools.vsan_pools
+  source = "./modules/vsan_pool"
+
+  ### Variables ###
+  vsan_pool = each.value
+}

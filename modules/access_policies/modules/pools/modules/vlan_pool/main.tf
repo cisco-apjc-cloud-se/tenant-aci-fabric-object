@@ -15,13 +15,13 @@ locals {
 }
 
 data "aci_vlan_pool" "pool" {
-  count = var.vlan_pool.use_existing == true ? 1 : 0
+  count = local.vlan_pool.use_existing == true ? 1 : 0
 
   name        = local.vlan_pool.pool_name
 }
 
 resource "aci_vlan_pool" "pool" {
-  count   = var.vlan_pool.use_existing == false ? 1 : 0
+  count   = local.vlan_pool.use_existing == false ? 1 : 0
 
   name        = local.vlan_pool.pool_name
   description = local.vlan_pool.description
@@ -35,6 +35,6 @@ module "ranges" {
   source    = "./modules/ranges"
 
   ### VARIABLES ###
-  pool_dn = var.vlan_pool.use_existing == true ? data.aci_vlan_pool.pool[0].id : aci_vlan_pool.pool[0].id
+  pool_dn = local.vlan_pool.use_existing == true ? data.aci_vlan_pool.pool[0].id : aci_vlan_pool.pool[0].id
   range   = each.value
 }

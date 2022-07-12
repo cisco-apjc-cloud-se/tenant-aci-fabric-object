@@ -7,3 +7,8 @@ terraform {
   }
   experiments = [module_variable_optional_attrs]
 }
+
+/*
+NO Terraform support for:
+- Overrides
+*/

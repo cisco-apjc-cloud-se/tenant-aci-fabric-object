@@ -7,3 +7,11 @@ terraform {
   }
   experiments = [module_variable_optional_attrs]
 }
+
+/*
+NOTE: Supported Policies Objects in Terraform
+- Fabric -> Access Policies -> Switches -> Spine -> Policy Groups -> Spine Switch Policy Group == aci_spine_switch_policy_group
+
+NO Terraform support for:
+-
+*/
