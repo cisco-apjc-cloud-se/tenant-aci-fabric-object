@@ -9,6 +9,9 @@ terraform {
 }
 
 /*
+NOTE: Supported Policies Objects in Terraform
+- Fabric -> Access Policies -> Interfaces -> Spine -> Profiles -> Spine Interface Profile == aci_spine_interface_profile
+
 NO Terraform support for:
-- Overrides
+-
 */

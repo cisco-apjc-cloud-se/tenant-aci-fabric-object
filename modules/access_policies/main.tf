@@ -8,6 +8,13 @@ terraform {
   experiments = [module_variable_optional_attrs]
 }
 
+/*
+NOTE:
+
+No Terraform support for:
+- Modules
+*/
+
 locals {}
 
 ### ACI Fabric Access Policy - Pools Module ###

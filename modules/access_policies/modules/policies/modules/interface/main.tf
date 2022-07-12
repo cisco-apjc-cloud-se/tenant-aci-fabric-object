@@ -14,6 +14,7 @@ NOTE: Supported Policies Objects in Terraform
 - Fabric -> Access Policies -> Policies -> Interface -> Fibre Channel Interface == aci_interface_fc_policy
 - Fabric -> Access Policies -> Policies -> Interface -> L2 Interface == aci_l2_interface_policy
 - Fabric -> Access Policies -> Policies -> Interface -> LLDP Interface == aci_lldp_interface_policy
+- Fabric -> Access Policies -> Policies -> Interface -> MCP Interface == aci_miscabling_protocol_interface_policy
 - Fabric -> Access Policies -> Policies -> Interface -> Port Security == aci_port_security_policy
 - Fabric -> Access Policies -> Policies -> Interface -> Spanning Tree Interface == aci_spanning_tree_interface_policy
 
@@ -27,7 +28,6 @@ NO support for:
 - Link Level
 - Link Level Flow Control
 - MACsec
-- MCP Interface
 - Netflow
 - PoE
 - Port Channel

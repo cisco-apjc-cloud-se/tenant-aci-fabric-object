@@ -7,3 +7,5 @@ terraform {
   }
   experiments = [module_variable_optional_attrs]
 }
+
+# NOTE: Both PC and vPC Interface Bundles
