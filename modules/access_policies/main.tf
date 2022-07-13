@@ -17,12 +17,20 @@ No Terraform support for:
 
 locals {}
 
-### ACI Fabric Access Policy - Pools Module ###
-module "pools" {
-  source = "./modules/pools"
+### ACI Fabric Access Policy - Domains Module ###
+module "domains" {
+  source = "./modules/domains"
 
   ### Variables ###
-  pools = var.access_policies.pools
+  domains = var.access_policies.domains
+}
+
+### ACI Fabric Access Policy - Interfaces Module ###
+module "interfaces" {
+  source = "./modules/interfaces"
+
+  ### Variables ###
+  interfaces = var.access_policies.interfaces
 }
 
 ### ACI Fabric Access Policy - Policies Module ###
@@ -31,4 +39,20 @@ module "policies" {
 
   ### Variables ###
   policies = var.access_policies.policies
+}
+
+### ACI Fabric Access Policy - Pools Module ###
+module "pools" {
+  source = "./modules/pools"
+
+  ### Variables ###
+  pools = var.access_policies.pools
+}
+
+### ACI Fabric Access Policy - Switches Module ###
+module "switches" {
+  source = "./modules/switches"
+
+  ### Variables ###
+  switches = var.access_policies.switches
 }
