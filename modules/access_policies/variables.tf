@@ -21,6 +21,52 @@ variable "access_policies" {
         vlan_pool   = string
       }))
     })
+    interfaces = object({
+      leaf = object({
+        policy_groups = map(object({
+          leaf_access_bundles = map(object({
+            name                    = string
+            description             = optional(string)
+            lag_t                   = optional(string) # The bundled ports group link aggregation type: port channel vs virtual port channel. Allowed values are "not-aggregated", "node" and "link". Default is "link".
+            annotation              = optional(string)
+            name_alias              = optional(string)
+            aaep_name               = optional(string)
+            link_level_policy_name  = optional(string)
+            lldp_intf_policy_name   = optional(string)
+            cdp_intf_policy_name    = optional(string)
+            mcp_intf_policy_name    = optional(string)
+            l2_intf_policy_name     = optional(string)
+            fc_intf_policy_name     = optional(string)
+            stp_intf_policy_name    = optional(string)
+            port_sec_policy_name    = optional(string)
+            pc_intf_policy_name     = optional(string)
+          }))
+          leaf_access_ports = map(object({
+            name                    = string
+            description             = optional(string)
+            annotation              = optional(string)
+            name_alias              = optional(string)
+            aaep_name               = optional(string)
+            link_level_policy_name  = optional(string)
+            lldp_intf_policy_name   = optional(string)
+            cdp_intf_policy_name    = optional(string)
+            mcp_intf_policy_name    = optional(string)
+            l2_intf_policy_name     = optional(string)
+            fc_intf_policy_name     = optional(string)
+            stp_intf_policy_name    = optional(string)
+            port_sec_policy_name    = optional(string)
+          }))
+          leaf_breakout_ports = map(object({
+            name        = string # (Required) Name of leaf breakout port group object.
+            annotation  = optional(string) # (Optional) Annotation for leaf breakout port group object.
+            brkout_map  = string # (Optional) Breakout map for leaf breakout port group object. Allowed values are "100g-2x", "100g-4x", "10g-4x", "25g-4x", "50g-8x" and "none". Default value is "none".
+            name_alias  = optional(string) # (Optional) Name alias for leaf breakout port group object.
+            description = optional(string) # (Optional) Description for leaf breakout port group object.
+          }))
+        }))
+      })
+      spine = object({})
+    })
     policies = object({
       global = object({
         aaeps = map(object({
@@ -74,6 +120,16 @@ variable "access_policies" {
           vepa        = optional(string) # (Optional) Determines if Virtual Ethernet Port Aggregator is disabled or enabled. Allowed values are "disabled" and "enabled". Default is "disabled".
           vlan_scope  = optional(string) # (Optional) The scope of the VLAN. Allowed values are "global" and "portlocal". Default is "global".
         }))
+        link_level_policies = map(object({
+          name          = string # (Required) Name of object fabric if pol.
+          annotation    = optional(string) # (Optional) Annotation for object fabric if pol.
+          description   = optional(string) # (Optional) Description for object fabric if pol.
+          auto_neg      = optional(string) # (Optional) Policy auto negotiation for object fabric if pol. Allowed values: "on", "off". Default value is "on".
+          fec_mode      = optional(string) # (Optional) Forwarding error correction for object fabric if pol. Allowed values: "inherit", "cl91-rs-fec", "cl74-fc-fec", "ieee-rs-fec", "cons16-rs-fec", "kp-fec", "disable-fec". Default value is "inherit".
+          link_debounce = optional(number) # (Optional) Link debounce interval for object fabric if pol. Range of allowed values: "0" to "5000". Default value is "100".
+          name_alias    = optional(string) # (Optional) Name alias for object fabric if pol.
+          speed         = optional(string) # (Optional) Port speed for object fabric if pol. Allowed values: "unknown", "100M", "1G", "10G", "25G", "40G", "50G", "100G","200G", "400G", "inherit". Default value is "inherit".
+        }))
         lldp_policies = map(object({
           name        = string # (Required) Name of Object LLDP Interface Policy.
           admin_rx_st = optional(string) # (Optional) Admin receive state. Allowed values are "enabled" and "disabled". Default value is "enabled".
@@ -88,6 +144,16 @@ variable "access_policies" {
           description = optional(string) # (Optional) Description for object miscabling protocol interface policy.
           annotation  = optional(string) # (Optional) Annotation for object miscabling protocol interface policy.
           name_alias  = optional(string) # (Optional) Name alias for object miscabling protocol interface policy.
+        }))
+        pc_policies = map(object({
+          name        = string # (Required) Name of Object LACP Policy.
+          description = optional(string) # (Optional) Description for object LACP Policy.
+          annotation  = optional(string) # (Optional) Annotation for object LACP Policy.
+          ctrl        = optional(list(string)) # (Optional) List of LAG control properties. Allowed values are "symmetric-hash", "susp-individual", "graceful-conv", "load-defer" and "fast-sel-hot-stdby". default value is ["fast-sel-hot-stdby", "graceful-conv", "susp-individual"]
+          max_links   = optional(number) # (Optional) Maximum number of links. Allowed value range is "1" - "16". Default is "16".
+          min_links   = optional(number) # (Optional) Minimum number of links in port channel. Allowed value range is "1" - "16". Default is "1".
+          mode        = optional(string) # (Optional) policy mode. Allowed values are "off", "active", "passive", "mac-pin" and "mac-pin-nicload". Default is "off".
+          name_alias  = optional(string) # (Optional) Name alias for object LACP Policy.
         }))
         port_security_policies = map(object({
           name        = string # (Required) Name of Object port security policy.

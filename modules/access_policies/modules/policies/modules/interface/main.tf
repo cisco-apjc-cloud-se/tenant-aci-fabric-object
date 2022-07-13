@@ -15,6 +15,7 @@ NOTE: Supported Policies Objects in Terraform
 - Fabric -> Access Policies -> Policies -> Interface -> L2 Interface == aci_l2_interface_policy
 - Fabric -> Access Policies -> Policies -> Interface -> LLDP Interface == aci_lldp_interface_policy
 - Fabric -> Access Policies -> Policies -> Interface -> MCP Interface == aci_miscabling_protocol_interface_policy
+- Fabric -> Access Policies -> Policies -> Interface -> Port Channel== aci_lacp_policy
 - Fabric -> Access Policies -> Policies -> Interface -> Port Security == aci_port_security_policy
 - Fabric -> Access Policies -> Policies -> Interface -> Spanning Tree Interface == aci_spanning_tree_interface_policy
 
@@ -30,7 +31,6 @@ NO support for:
 - MACsec
 - Netflow
 - PoE
-- Port Channel
 - Port Channel Member
 - Priority Flow Control
 - Slow Drain
@@ -66,6 +66,14 @@ locals {
       }
   },
   {
+    for k,p in var.interface.link_level_policies :
+      k => {
+        name = p.name
+        type = "link_level"
+        id = module.link_level[k].policy_id
+      }
+  },
+  {
     for k,p in var.interface.lldp_policies :
       k => {
         name = p.name
@@ -79,6 +87,14 @@ locals {
         name = p.name
         type = "mcp"
         id = module.mcp_interface[k].policy_id
+      }
+  },
+  {
+    for k,p in var.interface.pc_policies :
+      k => {
+        name = p.name
+        type = "pc"
+        id = module.pc_policies[k].policy_id
       }
   },
   {
@@ -127,6 +143,15 @@ module "l2_interface" {
   l2_interface = each.value
 }
 
+### ACI Fabric Access Policy - Interface - Link Level Policy Module ###
+module "link_level" {
+  for_each = var.interface.link_level_policies
+  source = "./modules/link_level"
+
+  ### VARIABLES ###
+  link_level = each.value
+}
+
 ### ACI Fabric Access Policy - Interface - LLDP Interface Policy Module ###
 module "lldp_interface" {
   for_each = var.interface.lldp_policies
@@ -143,6 +168,15 @@ module "mcp_interface" {
 
   ### VARIABLES ###
   mcp_interface = each.value
+}
+
+### ACI Fabric Access Policy - Interface - Port Channel Policy Module ###
+module "pc_interface" {
+  for_each = var.interface.pc_policies
+  source = "./modules/pc_interface"
+
+  ### VARIABLES ###
+  pc_interface = each.value
 }
 
 ### ACI Fabric Access Policy - Interface - Port Security Policy Module ###
