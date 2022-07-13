@@ -10,6 +10,27 @@ variable "fabric" {
     })
     ### Fabric Access Policies ###
     access_policies = object({
+      domains = object({
+        fc_domains = map(object({
+          name        = string
+          annotation  = optional(string)
+          name_alias  = optional(string)
+          vlan_pool   = string
+          vsan_pool   = string
+        }))
+        l3_domains = map(object({
+          name        = string
+          annotation  = optional(string)
+          name_alias  = optional(string)
+          vlan_pool   = string
+        }))
+        physical_domains = map(object({
+          name        = string
+          annotation  = optional(string)
+          name_alias  = optional(string)
+          vlan_pool   = string
+        }))
+      })
       policies = object({
       })
       pools = object({
