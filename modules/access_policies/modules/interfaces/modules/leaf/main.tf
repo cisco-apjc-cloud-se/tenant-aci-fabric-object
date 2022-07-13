@@ -15,11 +15,19 @@ NO Terraform support for:
 
 ### ACI Fabric Access Policy - Interfaces - Leaf - Policy Group Module ###
 module "policy_groups" {
-  for_each = var.leaf.policy_groups
   source = "./modules/policy_groups"
 
   ### VARIABLES ###
-  policy_group          = each.value
+  policy_groups         = var.policy_groups
   interface_policy_map  = var.interface_policy_map
   aaep_map              = var.aaep_map
+}
+
+### ACI Fabric Access Policy - Interfaces - Leaf - Profiles Module ###
+module "profiles" {
+  source = "./modules/profiles"
+
+  ### VARIABLES ###
+  profiles                    = var.profiles
+  interface_policy_group_map  = module.policy_groups.interface_policy_group_map
 }

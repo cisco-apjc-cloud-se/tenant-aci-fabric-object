@@ -1,4 +1,4 @@
-variable "policy_group" {
+variable "policy_groups" {
   type = object({
     leaf_access_bundles = map(object({
       name                    = string

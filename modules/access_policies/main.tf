@@ -30,7 +30,9 @@ module "interfaces" {
   source = "./modules/interfaces"
 
   ### Variables ###
-  interfaces = var.access_policies.interfaces
+  interfaces            = var.access_policies.interfaces
+  aaep_map              = module.policies.aaep_map
+  interface_policy_map  = module.policies.interface_policy_map
 }
 
 ### ACI Fabric Access Policy - Policies Module ###

@@ -17,3 +17,23 @@ NOTE: Supported Policies Objects in Terraform
 NO Terraform support for:
 -
 */
+
+### ACI Fabric Access Policy - Interfaces - Leaf - Profiles - FEX Profile Module ###
+module "fex_profile" {
+  for_each = var.profiles.fex_profiles
+  source = "./modules/fex_profile"
+
+  ### VARIABLES ###
+  fex_profile    = each.value
+}
+
+### ACI Fabric Access Policy - Interfaces - Leaf - Profiles - Interface Profile Module ###
+module "leaf_interface_profile" {
+  for_each = var.profiles.interface_profiles
+  source = "./modules/leaf_interface_profile"
+
+  ### VARIABLES ###
+  interface_profile           = each.value
+  interface_policy_group_map  = var.interface_policy_group_map
+
+}

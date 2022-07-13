@@ -18,6 +18,18 @@ NO support for:
 - DHCP Relay
 */
 
+locals {
+  ### AAEP NAME => ID Map ###
+  aaep_map = {
+    for k,p in var.global.aaeps :
+      k => {
+        name = p.name
+        id = module.aaep[k].aaep_id
+      }
+  }
+}
+
+
 ### ACI Fabric Access Policy - Global Policy - AAEP Module ###
 module "aaep" {
   for_each = var.global.aaeps

@@ -1,7 +1,7 @@
 variable "interfaces" {
   type = object({
     leaf = object({
-      policy_groups = map(object({
+      policy_groups = object({
         leaf_access_bundles = map(object({
           name                    = string
           description             = optional(string)
@@ -41,7 +41,7 @@ variable "interfaces" {
           name_alias  = optional(string) # (Optional) Name alias for leaf breakout port group object.
           description = optional(string) # (Optional) Description for leaf breakout port group object.
         }))
-      }))
+      })
     })
     spine = object({
 

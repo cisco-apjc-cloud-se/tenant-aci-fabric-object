@@ -8,7 +8,7 @@ terraform {
   experiments = [module_variable_optional_attrs]
 }
 
-resource "aci_leaf_breakout_port_group" "breakout" {
+resource "aci_leaf_breakout_port_group" "group" {
   name        = var.breakout.name
   annotation  = var.breakout.annotation
   brkout_map  = var.breakout.brkout_map

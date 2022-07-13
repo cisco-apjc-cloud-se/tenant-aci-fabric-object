@@ -21,9 +21,39 @@ NO Terraform support for:
 - FC PC Interface
 */
 
+
+locals {
+  ### Policy Group Name => ID Map ###
+  policy_grp_map = merge({
+    for k,p in var.policy_groups.leaf_access_bundles :
+      k => {
+        name = p.name
+        type = "bundle"
+        id = module.leaf_access_bundle[k].policy_grp_id
+      }
+  },
+  {
+    for k,p in var.policy_groups.leaf_access_ports :
+      k => {
+        name = p.name
+        type = "port"
+        id = module.leaf_access_ports[k].policy_grp_id
+      }
+  },
+  {
+    for k,p in var.policy_groups.leaf_breakout_ports :
+      k => {
+        name = p.name
+        type = "breakout"
+        id = module.leaf_breakout[k].policy_grp_id
+      }
+  }
+  )
+}
+
 ### ACI Fabric Access Policy - Interfaces - Leaf - Policy Group - Leaf Bundle (PC/vPC) Port Module ###
 module "leaf_access_bundle" {
-  for_each = var.policy_group.leaf_access_bundles
+  for_each = var.policy_groups.leaf_access_bundles
   source = "./modules/leaf_access_bundle"
 
   ### VARIABLES ###
@@ -34,7 +64,7 @@ module "leaf_access_bundle" {
 
 ### ACI Fabric Access Policy - Interfaces - Leaf - Policy Group - Leaf Access Port Module ###
 module "leaf_access_port" {
-  for_each = var.policy_group.leaf_access_ports
+  for_each = var.policy_groups.leaf_access_ports
   source = "./modules/leaf_access_port"
 
   ### VARIABLES ###
@@ -45,7 +75,7 @@ module "leaf_access_port" {
 
 ### ACI Fabric Access Policy - Interfaces - Leaf - Policy Group - Leaf Breakout Port Module ###
 module "leaf_breakout" {
-  for_each = var.policy_group.leaf_breakout_ports
+  for_each = var.policy_groups.leaf_breakout_ports
   source = "./modules/leaf_breakout"
 
   ### VARIABLES ###
