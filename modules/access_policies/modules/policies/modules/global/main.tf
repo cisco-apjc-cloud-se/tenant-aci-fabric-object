@@ -18,12 +18,20 @@ NO support for:
 - DHCP Relay
 */
 
-locals {
-  # ### Pool Name => ID Map ###
-  # vlan_pool_map = {
-  #   for k,p in var.pools.vlan_pools :
-  #     k => {
-  #       name = p.pool_name
-  #       id = module.access_policies[k].pool_id
-  #     }
-  }
+### ACI Fabric Access Policy - Global Policy - AAEP Module ###
+module "aaep" {
+  for_each = var.global.aaeps
+  source = "./modules/aaep"
+
+  ### VARIABLES ###
+  aaep        = each.value
+  domain_map  = var.domain_map
+}
+
+### ACI Fabric Access Policy - Global Policy - QoS Policy Module ###
+module "qos_class" {
+  source = "./modules/qos_class"
+
+  ### VARIABLES ###
+  qos_class   = var.global.qos_class
+}

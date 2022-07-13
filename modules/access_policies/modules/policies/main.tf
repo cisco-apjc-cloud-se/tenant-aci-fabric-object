@@ -16,4 +16,21 @@ locals {
   #       name = p.pool_name
   #       id = module.access_policies[k].pool_id
   #     }
-  }
+}
+
+### ACI Fabric Access Policy - Global Policies Module ###
+module "global" {
+  source = "./modules/global"
+
+  ### VARIABLES ###
+  global      = var.policies.global
+  domain_map  = var.domain.map
+}
+
+### ACI Fabric Access Policy - Interface Policies Module ###
+module "interface" {
+  source = "./modules/interface"
+
+  ### VARIABLES ###
+  interface   = var.policies.interface
+}

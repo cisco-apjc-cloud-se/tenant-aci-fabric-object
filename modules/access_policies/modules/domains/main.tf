@@ -8,6 +8,35 @@ terraform {
   experiments = [module_variable_optional_attrs]
 }
 
+locals {
+  ### Domain Name => ID Map ###
+  domain_map = merge({
+    for k,d in var.domains.physical_domains :
+      k => {
+        name = d.name
+        type = "physical"
+        id = module.physical_domain[k].domain_id
+      }
+  },
+  {
+    for k,d in var.domains.l3_domains :
+      k => {
+        name = d.name
+        type = "layer3"
+        id = module.l3_domains[k].domain_id
+      }
+  },
+  {
+    for k,d in var.domains.fc_domains :
+      k => {
+        name = d.name
+        type = "fc"
+        id = module.fc_domains[k].domain_id
+      }
+  }
+  )
+}
+
 ### ACI Fabric Access Policy - Physical Domain Module ###
 module "physical_domain" {
   for_each = var.domains.physical_domains

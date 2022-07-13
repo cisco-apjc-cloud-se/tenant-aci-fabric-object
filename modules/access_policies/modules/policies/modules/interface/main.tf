@@ -40,11 +40,125 @@ NO support for:
 */
 
 locals {
-  # ### Pool Name => ID Map ###
-  # vlan_pool_map = {
-  #   for k,p in var.pools.vlan_pools :
-  #     k => {
-  #       name = p.pool_name
-  #       id = module.access_policies[k].pool_id
-  #     }
+  ### Policy Name => ID Map ###
+  policy_map = merge({
+    for k,p in var.interface.cdp_policies :
+      k => {
+        name = p.name
+        type = "cdp"
+        id = module.cdp_interface[k].policy_id
+      }
+  },
+  {
+    for k,p in var.interface.fc_policies :
+      k => {
+        name = p.name
+        type = "fc"
+        id = module.fc_interface[k].policy_id
+      }
+  },
+  {
+    for k,p in var.interface.l2_policies :
+      k => {
+        name = p.name
+        type = "l2"
+        id = module.l2_interface[k].policy_id
+      }
+  },
+  {
+    for k,p in var.interface.lldp_policies :
+      k => {
+        name = p.name
+        type = "lldp"
+        id = module.lldp_interface[k].policy_id
+      }
+  },
+  {
+    for k,p in var.interface.mcp_policies :
+      k => {
+        name = p.name
+        type = "mcp"
+        id = module.mcp_interface[k].policy_id
+      }
+  },
+  {
+    for k,p in var.interface.port_security_policies :
+      k => {
+        name = p.name
+        type = "portsec"
+        id = module.port_security[k].policy_id
+      }
+  },
+  {
+    for k,p in var.interface.stp_policies :
+      k => {
+        name = p.name
+        type = "stp"
+        id = module.spanning_tree[k].policy_id
+      }
   }
+  )
+}
+
+### ACI Fabric Access Policy - Interface - CDP Interface Policy Module ###
+module "cdp_interface" {
+  for_each = var.interface.cdp_policies
+  source = "./modules/cdp_interface"
+
+  ### VARIABLES ###
+  cdp_interface = each.value
+}
+
+### ACI Fabric Access Policy - Interface - FC Interface Policy Module ###
+module "fc_interface" {
+  for_each = var.interface.fc_policies
+  source = "./modules/fc_interface"
+
+  ### VARIABLES ###
+  fc_interface = each.value
+}
+
+### ACI Fabric Access Policy - Interface - L2 Interface Policy Module ###
+module "l2_interface" {
+  for_each = var.interface.l2_policies
+  source = "./modules/l2_interface"
+
+  ### VARIABLES ###
+  l2_interface = each.value
+}
+
+### ACI Fabric Access Policy - Interface - LLDP Interface Policy Module ###
+module "lldp_interface" {
+  for_each = var.interface.lldp_policies
+  source = "./modules/lldp_interface"
+
+  ### VARIABLES ###
+  lldp_interface = each.value
+}
+
+### ACI Fabric Access Policy - Interface - MCP Interface Policy Module ###
+module "mcp_interface" {
+  for_each = var.interface.mcp_policies
+  source = "./modules/mcp_interface"
+
+  ### VARIABLES ###
+  mcp_interface = each.value
+}
+
+### ACI Fabric Access Policy - Interface - Port Security Policy Module ###
+module "port_security" {
+  for_each = var.interface.port_security_policies
+  source = "./modules/port_security"
+
+  ### VARIABLES ###
+  port_security = each.value
+}
+
+### ACI Fabric Access Policy - Interface - Spanning Tree Interface Policy Module ###
+module "spanning_tree" {
+  for_each = var.interface.stp_policies
+  source = "./modules/spanning_tree"
+
+  ### VARIABLES ###
+  spanning_tree = each.value
+}
