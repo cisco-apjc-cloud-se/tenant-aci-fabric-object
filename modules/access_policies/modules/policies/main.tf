@@ -34,3 +34,11 @@ module "interface" {
   ### VARIABLES ###
   interface   = var.policies.interface
 }
+
+### ACI Fabric Access Policy - Switch Policies Module ###
+module "switch" {
+  source = "./modules/switch"
+
+  ### VARIABLES ###
+  switch   = var.policies.switch
+}

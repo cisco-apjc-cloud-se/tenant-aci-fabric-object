@@ -15,3 +15,14 @@ NOTE: Supported Policies Objects in Terraform
 NO Terraform support for:
 -
 */
+
+### ACI Fabric Access Policy - Interfaces - Spine - Profiles - Spine Profile Module ###
+module "spine_profile" {
+  for_each = var.profiles.spine_profile
+  source = "./modules/spine_profile"
+
+  ### VARIABLES ###
+  spine_profile           = each.value
+  switch_policy_group_map = var.switch_policy_group_map
+
+}
