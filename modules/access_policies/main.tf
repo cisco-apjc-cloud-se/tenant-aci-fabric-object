@@ -23,6 +23,8 @@ module "domains" {
 
   ### Variables ###
   domains = var.access_policies.domains
+  vlan_pool_map = module.pools.vlan_pool_map
+  vsan_pool_map = module.pools.vsan_pool_map
 }
 
 ### ACI Fabric Access Policy - Interfaces Module ###
@@ -40,7 +42,8 @@ module "policies" {
   source = "./modules/policies"
 
   ### Variables ###
-  policies = var.access_policies.policies
+  policies    = var.access_policies.policies
+  domain_map  = module.domains.domain_map
 }
 
 ### ACI Fabric Access Policy - Pools Module ###
@@ -56,5 +59,9 @@ module "switches" {
   source = "./modules/switches"
 
   ### Variables ###
-  switches = var.access_policies.switches
+  switches                    = var.access_policies.switches
+  switch_policy_map           = module.policies.switch_policy_map
+  interface_policy_map        = module.policies.interface_policy_map
+  leaf_interface_profile_map  = module.interfaces.leaf_interface_profile_map
+  spine_interface_profile_map = module.interfaces.spine_interface_profile_map
 }
