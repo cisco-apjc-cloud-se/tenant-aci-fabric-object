@@ -18,7 +18,7 @@ module "policy_groups" {
   source = "./modules/policy_groups"
 
   ### VARIABLES ###
-  policy_groups         = var.policy_groups
+  policy_groups         = var.leaf.policy_groups
   interface_policy_map  = var.interface_policy_map
   aaep_map              = var.aaep_map
 }
@@ -28,6 +28,6 @@ module "profiles" {
   source = "./modules/profiles"
 
   ### VARIABLES ###
-  profiles                    = var.profiles
+  profiles                    = var.leaf.profiles
   interface_policy_group_map  = module.policy_groups.interface_policy_group_map
 }

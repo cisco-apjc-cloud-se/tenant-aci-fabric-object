@@ -19,3 +19,21 @@ resource "aci_access_port_selector" "selector" {
   ### Policy Group Name ###
   relation_infra_rs_acc_base_grp = var.port_selector.policy_group_name != null ? var.interface_policy_group_map[var.port_selector.policy_group_name].id
 }
+
+module "port_block" {
+  for_each = var.interface_profile.port_blocks
+  source = "./modules/port_block"
+
+  ### VARIABLES ###
+  access_port_selector_dn = aci_access_port_selector.selector.id
+  port_block              = each.value
+}
+
+module "sub_port_block" {
+  for_each = var.interface_profile.sub_port_blocks
+  source = "./modules/sub_port_block"
+
+  ### VARIABLES ###
+  access_port_selector_dn = aci_access_port_selector.selector.id
+  sub_port_block          = each.value
+}
