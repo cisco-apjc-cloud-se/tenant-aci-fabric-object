@@ -14,6 +14,11 @@ resource "aci_spine_profile" "profile" {
   annotation  = var.spine_profile.annotation
   name_alias  = var.spine_profile.name_alias
 
+  ### Interface Profiles ###
+  relation_infra_rs_sp_acc_port_p = [
+    for profile in var.spine_profile.interface_profiles :
+      var.interface_profile_map[profile].id
+  ]
   # relation_infra_rs_sp_acc_port_p - (Optional) Relation to class infraSpAccPortP. Cardinality - N_TO_M. Type - Set of String.
 }
 

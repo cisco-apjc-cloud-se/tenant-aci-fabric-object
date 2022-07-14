@@ -19,9 +19,12 @@ variable "spine_profile" {
         to_         = optional(number) # (Optional) To node ID. Range from 1 to 16000. Default value is "1".
       }))
     }))
+    interface_profiles = optional(list(string))
   })
 }
 
 # relation_infra_rs_sp_acc_port_p - (Optional) Relation to class infraSpAccPortP. Cardinality - N_TO_M. Type - Set of String.
 
 variable "switch_policy_group_map" {}
+
+variable "interface_profile_map" {}

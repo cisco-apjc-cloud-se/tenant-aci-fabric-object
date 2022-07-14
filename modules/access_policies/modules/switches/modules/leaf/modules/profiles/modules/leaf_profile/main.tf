@@ -13,7 +13,11 @@ resource "aci_leaf_profile" "profile" {
   description = var.leaf_profile.description
   annotation  = var.leaf_profile.annotation
   name_alias  = var.leaf_profile.name_alias
+
+  ### Interface Profiles ###
   # relation_infra_rs_acc_card_p - (Optional) Relation to class infraAccCardP. Cardinality - N_TO_M. Type - Set of String.
+
+  ### Module Profiles ###
   # relation_infra_rs_acc_port_p - (Optional) Relation to class infraAccPortP. Cardinality - N_TO_M. Type - Set of String.
 }
 
