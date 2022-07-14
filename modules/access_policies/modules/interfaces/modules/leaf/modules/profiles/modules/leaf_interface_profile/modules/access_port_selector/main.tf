@@ -17,11 +17,11 @@ resource "aci_access_port_selector" "selector" {
   name_alias                = var.port_selector.name_alias
 
   ### Policy Group Name ###
-  relation_infra_rs_acc_base_grp = var.port_selector.policy_group_name != null ? var.interface_policy_group_map[var.port_selector.policy_group_name].id
+  relation_infra_rs_acc_base_grp = var.port_selector.policy_group_name != null ? var.interface_policy_group_map[var.port_selector.policy_group_name].id : null
 }
 
 module "port_block" {
-  for_each = var.interface_profile.port_blocks
+  for_each = var.port_selector.port_blocks
   source = "./modules/port_block"
 
   ### VARIABLES ###
@@ -30,7 +30,7 @@ module "port_block" {
 }
 
 module "sub_port_block" {
-  for_each = var.interface_profile.sub_port_blocks
+  for_each = var.port_selector.sub_port_blocks
   source = "./modules/sub_port_block"
 
   ### VARIABLES ###

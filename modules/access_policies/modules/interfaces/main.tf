@@ -23,5 +23,7 @@ module "spine" {
   source = "./modules/spine"
 
   ### VARIABLES ###
-  spine   = var.interfaces.spine
+  spine                 = var.interfaces.spine
+  interface_policy_map  = var.interface_policy_map
+  aaep_map              = var.aaep_map
 }

@@ -53,7 +53,7 @@ variable "leaf" {
           annotation                = optional(string) # (Optional) Annotation for object Access Port Selector.
           description               = optional(string) # (Optional) Description for object Access Port Selector.
           name_alias                = optional(string) # (Optional) Name alias for object Access Port Selector.
-          policy_group_name         = string # Interface Policy Group Name
+          policy_group_name         = optional(string) # Interface Policy Group Name
           port_blocks = map(object({
             name        = string # (Optional) name of Object Access Port Block.
             annotation  = optional(string) # (Optional) Annotation for object Access Port Block.
@@ -89,7 +89,7 @@ variable "leaf" {
           annotation                = optional(string) # (Optional) Annotation for object Access Port Selector.
           description               = optional(string) # (Optional) Description for object Access Port Selector.
           name_alias                = optional(string) # (Optional) Name alias for object Access Port Selector.
-          policy_group_name         = string # Interface Policy Group Name
+          policy_group_name         = optional(string) # Interface Policy Group Name
           port_blocks = map(object({
             name        = string # (Optional) name of Object Access Port Block.
             annotation  = optional(string) # (Optional) Annotation for object Access Port Block.
