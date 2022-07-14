@@ -24,7 +24,8 @@ module "fex_profile" {
   source = "./modules/fex_profile"
 
   ### VARIABLES ###
-  fex_profile    = each.value
+  fex_profile                 = each.value
+  interface_policy_group_map  = var.interface_policy_group_map
 }
 
 ### ACI Fabric Access Policy - Interfaces - Leaf - Profiles - Interface Profile Module ###

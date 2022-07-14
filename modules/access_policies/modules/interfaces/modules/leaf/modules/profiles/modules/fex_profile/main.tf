@@ -14,3 +14,12 @@ resource "aci_fex_profile" "profile" {
   name_alias  = var.fex_profile.name_alias
   description = var.fex_profile.description
 }
+
+module "access_port_selector" {
+  for_each = var.interface_profile.port_selectors
+  source = "./modules/access_port_selector"
+
+  ### VARIABLES ###
+  leaf_interface_profile_dn = aci_fex_profile.profile.id
+  port_selector             = each.value
+}
