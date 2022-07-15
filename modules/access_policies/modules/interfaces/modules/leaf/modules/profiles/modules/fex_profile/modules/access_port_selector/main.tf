@@ -21,7 +21,7 @@ resource "aci_access_port_selector" "selector" {
 }
 
 module "port_block" {
-  for_each = var.interface_profile.port_blocks
+  for_each = var.port_selector.port_blocks
   source = "./modules/port_block"
 
   ### VARIABLES ###
@@ -30,7 +30,7 @@ module "port_block" {
 }
 
 module "sub_port_block" {
-  for_each = var.interface_profile.sub_port_blocks
+  for_each = var.port_selector.sub_port_blocks
   source = "./modules/sub_port_block"
 
   ### VARIABLES ###

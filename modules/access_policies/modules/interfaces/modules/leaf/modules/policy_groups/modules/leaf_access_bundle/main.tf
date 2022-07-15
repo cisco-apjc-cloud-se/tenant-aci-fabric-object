@@ -21,7 +21,7 @@ resource "aci_leaf_access_bundle_policy_group" "group" {
   relation_infra_rs_att_ent_p             = var.leaf_access_bundle.aaep_name != null ? var.aaep_map[var.leaf_access_bundle.aaep_name].id : null
 
   ### Link Level Policy ###
-  relation_infra_rs_h_if_pol              = var.leaf_access_bundle.level_link_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.level_link_policy_name].id : null
+  relation_infra_rs_h_if_pol              = var.leaf_access_bundle.link_level_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.link_level_policy_name].id : null
 
   ### LLDP Interface Policy ###
   relation_infra_rs_lldp_if_pol           = var.leaf_access_bundle.lldp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.lldp_intf_policy_name].id : null

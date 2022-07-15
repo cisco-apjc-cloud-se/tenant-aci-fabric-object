@@ -20,6 +20,7 @@ variable "leaf" {
           annotation              = optional(string) # (Optional) Annotation for object switch association.
           description             = optional(string) # (Optional) Description for object switch association.
           name_alias              = optional(string) # (Optional) Name alias for object switch association.
+          policy_group_name       = optional(string)
           node_blocks = map(object({
             name        = string # (Required) Name of Object node block.
             annotation  = optional(string) # (Optional) Annotation for object node block.

@@ -18,7 +18,7 @@ resource "aci_spine_port_policy_group" "group" {
   relation_infra_rs_att_ent_p   = var.spine_port.aaep_name != null ? var.aaep_map[var.spine_port.aaep_name].id : null
 
   ### Link Level Policy ###
-  relation_infra_rs_h_if_pol    = var.spine_port.level_link_policy_name != null ? var.interface_policy_map[var.spine_port.level_link_policy_name].id : null
+  relation_infra_rs_h_if_pol    = var.spine_port.link_level_policy_name != null ? var.interface_policy_map[var.spine_port.link_level_policy_name].id : null
 
   ### CDP Interface Policy ###
   relation_infra_rs_cdp_if_pol  = var.spine_port.cdp_intf_policy_name != null ? var.interface_policy_map[var.spine_port.cdp_intf_policy_name].id : null
