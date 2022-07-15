@@ -18,34 +18,34 @@ resource "aci_leaf_access_bundle_policy_group" "group" {
   name_alias    = var.leaf_access_bundle.name_alias
 
   ### Attached Entity Profile ###
-  relation_infra_rs_att_ent_p             = var.leaf_access_bundle.aaep_name != null ? var.aaep_map[var.leaf_access_port.aaep_name].id : null
+  relation_infra_rs_att_ent_p             = var.leaf_access_bundle.aaep_name != null ? var.aaep_map[var.leaf_access_bundle.aaep_name].id : null
 
   ### Link Level Policy ###
-  relation_infra_rs_h_if_pol              = var.leaf_access_bundle.level_link_policy_name != null ? var.interface_policy_map[var.leaf_access_port.level_link_policy_name].id : null
+  relation_infra_rs_h_if_pol              = var.leaf_access_bundle.level_link_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.level_link_policy_name].id : null
 
   ### LLDP Interface Policy ###
-  relation_infra_rs_lldp_if_pol           = var.leaf_access_bundle.lldp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_port.lldp_intf_policy_name].id : null
+  relation_infra_rs_lldp_if_pol           = var.leaf_access_bundle.lldp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.lldp_intf_policy_name].id : null
 
   ### CDP Interface Policy ###
-  relation_infra_rs_cdp_if_pol            = var.leaf_access_bundle.cdp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_port.cdp_intf_policy_name].id : null
+  relation_infra_rs_cdp_if_pol            = var.leaf_access_bundle.cdp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.cdp_intf_policy_name].id : null
 
   ### MCP Interface Policy ###
-  relation_infra_rs_mcp_if_pol            = var.leaf_access_bundle.mcp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_port.mcp_intf_policy_name].id : null
+  relation_infra_rs_mcp_if_pol            = var.leaf_access_bundle.mcp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.mcp_intf_policy_name].id : null
 
   ### L2 Interface Policy ###
-  relation_infra_rs_l2_if_pol             = var.leaf_access_bundle.l2_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_port.l2_intf_policy_name].id : null
+  relation_infra_rs_l2_if_pol             = var.leaf_access_bundle.l2_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.l2_intf_policy_name].id : null
 
   ### FC Interface Policy ###
-  relation_infra_rs_fc_if_pol             = var.leaf_access_bundle.fc_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_port.fc_intf_policy_name].id : null
+  relation_infra_rs_fc_if_pol             = var.leaf_access_bundle.fc_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.fc_intf_policy_name].id : null
 
   ### STP Interface Policy ###
-  relation_infra_rs_stp_if_pol            = var.leaf_access_bundle.stp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_port.stp_intf_policy_name].id : null
+  relation_infra_rs_stp_if_pol            = var.leaf_access_bundle.stp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.stp_intf_policy_name].id : null
 
   ### Port Security Policy ###
-  relation_infra_rs_l2_port_security_pol  = var.leaf_access_bundle.port_sec_policy_name != null ? var.interface_policy_map[var.leaf_access_port.port_sec_policy_name].id : null
+  relation_infra_rs_l2_port_security_pol  = var.leaf_access_bundle.port_sec_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.port_sec_policy_name].id : null
 
   ### LACP Interface Policy ###
-  relation_infra_rs_lacp_pol              = var.leaf_access_bundle.pc_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_port.pc_intf_policy_name].id : null
+  relation_infra_rs_lacp_pol              = var.leaf_access_bundle.pc_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.pc_intf_policy_name].id : null
 
 #   relation_infra_rs_span_v_src_grp - (Optional) Relation to class spanVSrcGrp. Cardinality - N_TO_M. Type - Set of String.
 #   relation_infra_rs_stormctrl_if_pol - (Optional) Relation to class stormctrlIfPol. Cardinality - N_TO_ONE. Type - String.
