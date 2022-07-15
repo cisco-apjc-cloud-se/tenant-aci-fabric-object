@@ -94,7 +94,7 @@ locals {
       k => {
         name = p.name
         type = "pc"
-        id = module.pc_policies[k].policy_id
+        id = module.pc_interface[k].policy_id
       }
   },
   {

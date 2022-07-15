@@ -53,7 +53,7 @@ locals {
 
 ### ACI Fabric Access Policy - Switch - VPC Domain Policy Module ###
 module "vpc_domain" {
-  for_each = var.switch.vpc_domain_policies
+  for_each = var.switch.vpc_domains
   source = "./modules/vpc_domain"
 
   ### VARIABLES ###

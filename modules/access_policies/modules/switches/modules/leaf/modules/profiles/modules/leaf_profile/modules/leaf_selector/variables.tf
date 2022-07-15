@@ -19,3 +19,5 @@ variable "leaf_selector" {
 # relation_infra_rs_acc_node_p_grp - (Optional) Relation to class infraAccNodePGrp. Cardinality - N_TO_ONE. Type - String.
 
 variable "leaf_profile_dn" {}
+
+variable "switch_policy_group_map" {}

@@ -18,7 +18,7 @@ NO Terraform support for:
 
 ### ACI Fabric Access Policy - Interfaces - Spine - Profiles - Spine Profile Module ###
 module "spine_profile" {
-  for_each = var.profiles.spine_profile
+  for_each = var.profiles.spine_profiles
   source = "./modules/spine_profile"
 
   ### VARIABLES ###

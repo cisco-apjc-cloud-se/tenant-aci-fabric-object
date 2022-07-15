@@ -10,7 +10,7 @@ terraform {
 
 locals {
   vlan_pool = defaults(var.vlan_pool, {
-    use_existing = false
+    use_existing  = false
   })
 }
 
@@ -18,6 +18,7 @@ data "aci_vlan_pool" "pool" {
   count = local.vlan_pool.use_existing == true ? 1 : 0
 
   name        = local.vlan_pool.pool_name
+  alloc_mode  = local.vlan_pool.alloc_mode # (Required) Allocation mode for object vlan_pool. Allowed values: "dynamic", "static"
 }
 
 resource "aci_vlan_pool" "pool" {

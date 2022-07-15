@@ -26,6 +26,7 @@ module "leaf_selector" {
   source = "./modules/leaf_selector"
 
   ### VARIABLES ###
-  leaf_profile_dn = aci_leaf_profile.profile.id
-  leaf_selector   = each.value
+  leaf_profile_dn         = aci_leaf_profile.profile.id
+  switch_policy_group_map = var.switch_policy_group_map
+  leaf_selector           = each.value
 }

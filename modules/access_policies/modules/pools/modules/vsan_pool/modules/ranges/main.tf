@@ -9,7 +9,7 @@ terraform {
 }
 
 resource "aci_ranges" "range" {
-  vsan_pool_dn  = var.pool_dn
+  vlan_pool_dn  = var.pool_dn
   description   = var.range.description
   from          = format("vsan-%d", var.range.from) #"vsan-1"
   to            = format("vsan-%d", var.range.to) #"vsan-2"

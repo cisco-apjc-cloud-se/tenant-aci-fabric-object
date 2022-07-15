@@ -16,7 +16,7 @@ resource "aci_fex_profile" "profile" {
 }
 
 module "access_port_selector" {
-  for_each = var.interface_profile.port_selectors
+  for_each = var.fex_profile.port_selectors
   source = "./modules/access_port_selector"
 
   ### VARIABLES ###
