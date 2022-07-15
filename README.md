@@ -1,5 +1,17 @@
 # terraform-aci-fabric-object
-Terraform module to build and manage ACI Fabric policies in entirety from a single HCL/JSON object variable file.
+Terraform module to build and manage ACI Fabric policies in entirety from a single HCL/JSON/YAML object variable file.
+
+## TO DO:
+- Evaluate "use_existing" support
+ - Use existing policies in new policy groups (inc. AAEP)
+ - Use existing policy group in new profile
+ - Use existing (leaf) selector for new (leaf) profile
+ - Use new selector with existing profile (?)
+ - Use existing interface profiles in list for new leaf profile (?)
+ - Use existing domain in domain list for new AAEP
+- pool_name to name
+- Global Error & MCP Instance Policies
+
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
