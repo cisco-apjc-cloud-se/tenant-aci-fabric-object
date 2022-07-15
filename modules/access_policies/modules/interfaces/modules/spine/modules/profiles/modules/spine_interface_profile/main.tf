@@ -22,5 +22,6 @@ module "spine_port_selector" {
 
   ### VARIABLES ###
   spine_interface_profile_dn = aci_spine_interface_profile.profile.id
+  interface_policy_group_map = var.interface_policy_group_map
   port_selector              = each.value
 }
