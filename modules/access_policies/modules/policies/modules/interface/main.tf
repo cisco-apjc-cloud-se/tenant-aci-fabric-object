@@ -176,7 +176,7 @@ module "pc_interface" {
   source = "./modules/pc_interface"
 
   ### VARIABLES ###
-  pc_interface = each.value
+  port_channel = each.value
 }
 
 ### ACI Fabric Access Policy - Interface - Port Security Policy Module ###
