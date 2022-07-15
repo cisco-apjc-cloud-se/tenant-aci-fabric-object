@@ -11,7 +11,7 @@ terraform {
 ### ACI Fabric - Inventory - Pod Module ###
 module "pod" {
   for_each = var.inventory.pods
-  source = "./modules/pod"
+  source = "./modules/pods"
 
   ### Variables ###
   pod = each.value

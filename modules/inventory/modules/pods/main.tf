@@ -9,9 +9,9 @@ terraform {
 }
 
 ### ACI Fabric - Inventory - Pod - Leaf Module ###
-module "leaf" {
+module "leaf_switches" {
   for_each = var.pod.leaf_switches
-  source = "./modules/leaf"
+  source = "./modules/leaf_switches"
 
   ### Variables ###
   leaf  = each.value
