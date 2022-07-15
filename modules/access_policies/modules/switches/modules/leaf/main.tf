@@ -29,4 +29,5 @@ module "profiles" {
   ### VARIABLES ###
   profiles                = var.leaf.profiles
   switch_policy_group_map = module.policy_groups.switch_policy_group_map
+  interface_profile_map   = var.interface_profile_map
 }

@@ -36,3 +36,5 @@ variable "leaf" {
 }
 
 variable "switch_policy_map" {}
+
+variable "interface_profile_map" {}

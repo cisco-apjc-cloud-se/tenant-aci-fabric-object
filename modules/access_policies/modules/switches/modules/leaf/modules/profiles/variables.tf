@@ -26,3 +26,5 @@ variable "profiles" {
 }
 
 variable "switch_policy_group_map" {}
+
+variable "interface_profile_map" {}

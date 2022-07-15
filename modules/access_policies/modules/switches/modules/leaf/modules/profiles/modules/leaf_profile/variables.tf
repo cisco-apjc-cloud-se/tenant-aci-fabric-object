@@ -27,3 +27,5 @@ variable "leaf_profile" {
 # relation_infra_rs_acc_port_p - (Optional) Relation to class infraAccPortP. Cardinality - N_TO_M. Type - Set of String.
 
 variable "switch_policy_group_map" {}
+
+variable "interface_profile_map" {}

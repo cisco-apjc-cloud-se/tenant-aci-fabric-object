@@ -16,7 +16,7 @@ module "leaf" {
   leaf                  = var.switches.leaf
   switch_policy_map     = var.switch_policy_map
   # interface_policy_map  = var.interface_policy_map
-  # interface_profile_map = var.leaf_interface_profile_map
+  interface_profile_map = var.leaf_interface_profile_map
 }
 
 ### ACI Fabric Access Policy - Switches - Spine Module ###
