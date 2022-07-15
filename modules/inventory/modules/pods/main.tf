@@ -14,6 +14,6 @@ module "leaf_switches" {
   source = "./modules/leaf_switches"
 
   ### Variables ###
-  leaf  = each.value
-  pod   = var.pod.id
+  leaf    = each.value
+  pod_id  = var.pod.pod_id
 }
