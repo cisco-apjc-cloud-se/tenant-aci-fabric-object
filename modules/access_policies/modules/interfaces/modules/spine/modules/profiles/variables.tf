@@ -26,3 +26,5 @@ variable "profiles" {
     }))
   })
 }
+
+variable "interface_policy_group_map" {}
