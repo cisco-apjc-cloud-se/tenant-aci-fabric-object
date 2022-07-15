@@ -15,7 +15,7 @@ locals {
       k => {
         name = d.name
         type = "physical"
-        id = module.physical_domain[k].domain_id
+        id = module.physical_domains[k].domain_id
       }
   },
   {
@@ -38,9 +38,9 @@ locals {
 }
 
 ### ACI Fabric Access Policy - Physical Domain Module ###
-module "physical_domain" {
+module "physical_domains" {
   for_each = var.domains.physical_domains
-  source = "./modules/physical_domain"
+  source = "./modules/physical_domains"
 
   ### Variables ###
   physical_domain = each.value
@@ -48,9 +48,9 @@ module "physical_domain" {
 }
 
 ### ACI Fabric Access Policy - Layer 3 Domain Module ###
-module "l3_domain" {
+module "l3_domains" {
   for_each = var.domains.l3_domains
-  source = "./modules/layer3_domain"
+  source = "./modules/layer3_domains"
 
   ### Variables ###
   l3_domain       = each.value
@@ -58,9 +58,9 @@ module "l3_domain" {
 }
 
 ### ACI Fabric Access Policy - FC Domain Module ###
-module "fc_domain" {
+module "fc_domains" {
   for_each = var.domains.fc_domains
-  source = "./modules/fc_domain"
+  source = "./modules/fc_domains"
 
   ### Variables ###
   fc_domain       = each.value
