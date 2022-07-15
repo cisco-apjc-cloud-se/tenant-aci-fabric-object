@@ -20,7 +20,7 @@ resource "aci_leaf_access_port_policy_group" "group" {
   relation_infra_rs_att_ent_p             = var.leaf_access_port.aaep_name != null ? var.aaep_map[var.leaf_access_port.aaep_name].id : null
 
   ### Link Level Policy ###
-  relation_infra_rs_h_if_pol              = var.leaf_access_port.level_link_policy_name != null ? var.interface_policy_map[var.leaf_access_port.level_link_policy_name].id : null
+  relation_infra_rs_h_if_pol              = var.leaf_access_port.link_level_policy_name != null ? var.interface_policy_map[var.leaf_access_port.link_level_policy_name].id : null
 
   ### LLDP Interface Policy ###
   relation_infra_rs_lldp_if_pol           = var.leaf_access_port.lldp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_port.lldp_intf_policy_name].id : null

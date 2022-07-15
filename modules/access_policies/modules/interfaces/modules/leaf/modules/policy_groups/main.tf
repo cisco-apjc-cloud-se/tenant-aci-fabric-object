@@ -37,7 +37,7 @@ locals {
       k => {
         name = p.name
         type = "port"
-        id = module.leaf_access_ports[k].policy_grp_id
+        id = module.leaf_access_port[k].policy_grp_id
       }
   },
   {
