@@ -20,6 +20,7 @@ module "access_port_selector" {
   source = "./modules/access_port_selector"
 
   ### VARIABLES ###
-  leaf_interface_profile_dn = aci_leaf_interface_profile.profile.id
-  port_selector             = each.value
+  leaf_interface_profile_dn   = aci_leaf_interface_profile.profile.id
+  interface_policy_group_map  = var.interface_policy_group_map
+  port_selector               = each.value
 }
