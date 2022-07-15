@@ -50,7 +50,7 @@ module "physical_domain" {
 ### ACI Fabric Access Policy - Layer 3 Domain Module ###
 module "l3_domain" {
   for_each = var.domains.l3_domains
-  source = "./modules/l3_domain"
+  source = "./modules/layer3_domain"
 
   ### Variables ###
   l3_domain       = each.value
