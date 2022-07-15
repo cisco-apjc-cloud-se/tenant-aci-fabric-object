@@ -42,6 +42,7 @@ module "aaep" {
 
 ### ACI Fabric Access Policy - Global Policy - QoS Policy Module ###
 module "qos_class" {
+  count = var.global.qos_class != null ? 1 : 0
   source = "./modules/qos_class"
 
   ### VARIABLES ###
