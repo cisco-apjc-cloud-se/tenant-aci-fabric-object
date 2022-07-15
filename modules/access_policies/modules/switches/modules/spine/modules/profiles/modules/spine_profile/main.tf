@@ -27,7 +27,7 @@ module "spine_selector" {
   source = "./modules/spine_selector"
 
   ### VARIABLES ###
-  spined_profile_dn       = aci_spine_profile.profile.id
+  spine_profile_dn       = aci_spine_profile.profile.id
   spine_selector          = each.value
   switch_policy_group_map = var.switch_policy_group_map
 }
