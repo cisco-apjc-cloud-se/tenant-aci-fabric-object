@@ -13,7 +13,7 @@ resource "aci_node_block" "check" {
   name                    = var.node_block.name
   annotation              = var.node_block.annotation
   description             = var.node_block.description
-  from_                   = var.node_block.from_
+  from_                   = var.node_block.from_node
   name_alias              = var.node_block.name_alias
-  to_                     = var.node_block.to_
+  to_                     = var.node_block.to_node
 }
