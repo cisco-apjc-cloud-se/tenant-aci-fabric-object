@@ -30,6 +30,6 @@ resource "aci_aaep_to_domain" "domain" {
 }
 
 resource "aci_vlan_encapsulationfor_vxlan_traffic" "infra" {
-  count = var.aeep.enable_infra_vlan == true ? 1 : 0
-  attachable_access_entity_profile_dn  = ci_attachable_access_entity_profile.aaep.id
+  count = var.aaep.enable_infra_vlan == true ? 1 : 0
+  attachable_access_entity_profile_dn  = aci_attachable_access_entity_profile.aaep.id
 }
