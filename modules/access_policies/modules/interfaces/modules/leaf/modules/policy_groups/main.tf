@@ -79,5 +79,5 @@ module "leaf_breakout" {
   source = "./modules/leaf_breakout"
 
   ### VARIABLES ###
-  leaf_breakout      = each.value
+  breakout = each.value
 }
