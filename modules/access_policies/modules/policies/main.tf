@@ -24,7 +24,7 @@ module "global" {
 
   ### VARIABLES ###
   global      = var.policies.global
-  domain_map  = var.domain.map
+  domain_map  = var.domain_map
 }
 
 ### ACI Fabric Access Policy - Interface Policies Module ###

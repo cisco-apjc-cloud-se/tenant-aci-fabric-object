@@ -16,6 +16,19 @@ NO Terraform support for:
 -
 */
 
+locals {
+  ### Policy Group Name => ID Map ###
+  policy_grp_map = merge({
+    for k,p in var.policy_groups.spine_ports :
+      k => {
+        name = p.name
+        type = "spine_port"
+        id = module.spine_port[k].policy_grp_id
+      }
+  }
+  )
+}
+
 ### ACI Fabric Access Policy - Interfaces - Spine - Policy Group - Spine Port Module ###
 module "spine_port" {
   for_each = var.policy_groups.spine_ports

@@ -13,7 +13,7 @@ module "leaf" {
   source = "./modules/leaf"
 
   ### VARIABLES ###
-  leaf                  = var.switch.leaf
+  leaf                  = var.switches.leaf
   switch_policy_map     = var.switch_policy_map
   # interface_policy_map  = var.interface_policy_map
   # interface_profile_map = var.leaf_interface_profile_map
@@ -24,7 +24,7 @@ module "spine" {
   source = "./modules/spine"
 
   ### VARIABLES ###
-  spine                 = var.switch.spine
+  spine                 = var.switches.spine
   # switch_policy_map     = var.switch_policy_map
   interface_policy_map  = var.interface_policy_map
   interface_profile_map = var.spine_interface_profile_map
