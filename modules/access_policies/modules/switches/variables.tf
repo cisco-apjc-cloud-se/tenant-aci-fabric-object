@@ -75,4 +75,6 @@ variable "switch_policy_map" {}
 
 variable "interface_policy_map" {}
 
-variable "interface_profile_map" {}
+variable "leaf_interface_profile_map" {}
+
+variable "spine_interface_profile_map" {}
