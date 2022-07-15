@@ -32,4 +32,4 @@ resource "aci_access_switch_policy_group" "group" {
   # relation_infra_rs_poe_inst_pol - (Optional) Represents the relation to a POE Node Policy (class poeInstPol). Relationship to POE Node Policy Type: String.
   # relation_infra_rs_topoctrl_fast_link_failover_inst_pol - (Optional) Represents the relation to a Fast Link Failover Instance Policy (class topoctrlFastLinkFailoverInstPol). Relation to topoctrlFastLinkFailoverPol Type: String.
   # relation_infra_rs_topoctrl_fwd_scale_prof_pol - (Optional) Represents the relation to a Forwarding Scale Profile Policy (class topoctrlFwdScaleProfilePol). Relation to topoctrlFwdScaleProfilePol Type: String.
-  }
+}
