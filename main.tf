@@ -24,3 +24,11 @@ module "access_policies" {
   ### Variables ###
   access_policies = var.fabric.access_policies
 }
+
+### Fabric Inventory Module ###
+module "inventory" {
+  source = "./modules/inventory"
+
+  ### Variables ###
+  inventory = var.fabric.inventory
+}
