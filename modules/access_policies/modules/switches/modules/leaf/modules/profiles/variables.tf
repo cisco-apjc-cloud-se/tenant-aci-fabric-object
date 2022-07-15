@@ -1,11 +1,12 @@
 variable "profiles" {
   type = object({
     leaf_profiles = map(object({
-      name            = string # (Required) Name of Object leaf profile.
-      description     = optional(string) # (Optional) Description for object leaf profile.
-      annotation      = optional(string) # (Optional) Annotation for object leaf profile.
-      name_alias      = optional(string) # (Optional) Name alias for object leaf profile.
-      leaf_selectors  = map(object({
+      name                = string # (Required) Name of Object leaf profile.
+      description         = optional(string) # (Optional) Description for object leaf profile.
+      annotation          = optional(string) # (Optional) Annotation for object leaf profile.
+      name_alias          = optional(string) # (Optional) Name alias for object leaf profile.
+      interface_profiles  = list(string)
+      leaf_selectors      = map(object({
         name                    = string # (Required) Name of Object switch association.
         switch_association_type = string # (Required) The leaf selector type. Allowed values: "ALL", "range", "ALL_IN_POD".
         annotation              = optional(string) # (Optional) Annotation for object switch association.
