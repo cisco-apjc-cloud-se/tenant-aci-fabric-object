@@ -1,4 +1,4 @@
-variables "profiles" {
+variable "profiles" {
   type = object({
     fex_profiles = map(object({
       name        = string # (Required) The FEX profile name.

@@ -1,4 +1,4 @@
-variables "profiles" {
+variable "profiles" {
   type = object({
     leaf_profiles = map(object({
       name            = string # (Required) Name of Object leaf profile.

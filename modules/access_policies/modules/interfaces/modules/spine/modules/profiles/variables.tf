@@ -1,4 +1,4 @@
-variables "profiles" {
+variable "profiles" {
   type = object({
     interface_profiles = map(object({
       name        = string # (Required) Name of Object spine interface profile.
