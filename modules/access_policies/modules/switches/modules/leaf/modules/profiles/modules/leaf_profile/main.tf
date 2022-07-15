@@ -14,14 +14,16 @@ resource "aci_leaf_profile" "profile" {
   annotation  = var.leaf_profile.annotation
   name_alias  = var.leaf_profile.name_alias
 
-  ### Interface Profiles ###
-  relation_infra_rs_acc_card_p = [
+  ### Module Profiles ###
+  # relation_infra_rs_acc_card_p - (Optional) Relation to class infraAccCardP. Cardinality - N_TO_M. Type - Set of String.
+
+  ### Access Interface Profiles ###
+  # relation_infra_rs_acc_port_p - (Optional) Relation to class infraAccPortP. Cardinality - N_TO_M. Type - Set of String.
+  relation_infra_rs_acc_port_p = [
     for profile in var.leaf_profile.interface_profiles :
       var.interface_profile_map[profile].id
   ]
 
-  ### Module Profiles ###
-  # relation_infra_rs_acc_port_p - (Optional) Relation to class infraAccPortP. Cardinality - N_TO_M. Type - Set of String.
 }
 
 module "leaf_selector" {
