@@ -218,7 +218,7 @@ variable "fabric" {
             name_alias  = optional(string)
             domain_list = list(string)
           }))
-          qos_class = object({
+          qos_class = optional(object({
             name_alias            = optional(string) # "qos_instance_alias"
             description           = optional(string) # "From Terraform"
             etrap_age_timer       = optional(number) # "0"
@@ -231,7 +231,7 @@ variable "fabric" {
             ctrl                  = optional(string) # "none"
             uburst_spine_queues   = optional(number) # "10"
             uburst_tor_queues     = optional(number) # "10"
-          })
+          }))
         })
         interface = object({
           cdp_policies = map(object({
