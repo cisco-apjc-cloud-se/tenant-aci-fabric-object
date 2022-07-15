@@ -25,7 +25,7 @@ module "spine" {
 
   ### VARIABLES ###
   spine                 = var.switch.spine
-  switch_policy_map     = var.switch_policy_map
+  # switch_policy_map     = var.switch_policy_map
   interface_policy_map  = var.interface_policy_map
   interface_profile_map = var.spine_interface_profile_map
 }
