@@ -8,7 +8,7 @@ terraform {
   experiments = [module_variable_optional_attrs]
 }
 
-resource "aci_node_block" "check" {
+resource "aci_node_block" "block" {
   switch_association_dn   = var.switch_association_dn
   name                    = var.node_block.name
   annotation              = var.node_block.annotation
