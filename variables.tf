@@ -212,11 +212,12 @@ variable "fabric" {
       policies = object({
         global = object({
           aaeps = map(object({
-            description = optional(string)
-            name        = string
-            annotation  = optional(string)
-            name_alias  = optional(string)
-            domain_list = list(string)
+            name              = string
+            description       = optional(string)
+            annotation        = optional(string)
+            name_alias        = optional(string)
+            enable_infra_vlan = bool
+            domain_list       = list(string)
           }))
           qos_class = optional(object({
             name_alias            = optional(string) # "qos_instance_alias"
