@@ -17,7 +17,7 @@ resource "aci_access_port_selector" "selector" {
   name_alias                = var.port_selector.name_alias
 
   ### Policy Group Name ###
-  relation_infra_rs_acc_base_grp = var.port_selector.policy_group_name != null ? var.interface_policy_group_map[var.port_selector.policy_group_name].id
+  relation_infra_rs_acc_base_grp = var.port_selector.policy_group_name != null ? var.interface_policy_group_map[var.port_selector.policy_group_name].id : null
 }
 
 module "port_block" {
