@@ -1,10 +1,18 @@
 variable "fc_domain" {
   type = object({
-    name                                = string
-    annotation                          = optional(string)
-    name_alias                          = optional(string)
-    vsan_pool                           = string
-    vlan_pool                           = string
+    name       = string
+    annotation = optional(string)
+    name_alias = optional(string)
+    vsan_pool  = object({
+      use_existing  = optional(bool)
+      name          = string
+      alloc_mode    = optional(string)
+    })
+    vlan_pool  = object({
+      use_existing  = optional(bool)
+      name          = string
+      alloc_mode    = optional(string)
+    })
     # relation_infra_rs_vlan_ns - (Optional) Relation to class fvnsVlanInstP. Cardinality - N_TO_ONE. Type - String.
     # relation_fc_rs_vsan_ns - (Optional) Relation to class fvnsVsanInstP. Cardinality - N_TO_ONE. Type - String.
     # relation_fc_rs_vsan_attr - (Optional) Relation to class fcVsanAttrP. Cardinality - N_TO_ONE. Type - String.
