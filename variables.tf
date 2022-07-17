@@ -351,7 +351,7 @@ variable "fabric" {
       })
       pools = object({
         vlan_pools = map(object({
-          pool_name     = string
+          name          = string
           use_existing  = optional(bool)
           description   = optional(string)
           alloc_mode    = string # Allocation mode for object vlan_pool. Allowed values: "dynamic", "static"
@@ -368,7 +368,7 @@ variable "fabric" {
           }))
         }))
         vsan_pools = map(object({
-          pool_name     = string
+          name          = string
           use_existing  = optional(bool)
           description   = optional(string)
           alloc_mode    = optional(string) # Allocation mode for object vsan_pool. Allowed values: "static"

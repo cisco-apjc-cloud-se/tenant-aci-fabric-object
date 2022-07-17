@@ -14,17 +14,19 @@ locals {
   })
 }
 
+### Optionaly load exising VLAN pool ###
 data "aci_vlan_pool" "pool" {
   count = local.vlan_pool.use_existing == true ? 1 : 0
 
-  name        = local.vlan_pool.pool_name
+  name        = local.vlan_pool.name
   alloc_mode  = local.vlan_pool.alloc_mode # (Required) Allocation mode for object vlan_pool. Allowed values: "dynamic", "static"
 }
 
+### Build new VLAN pool ###
 resource "aci_vlan_pool" "pool" {
   count   = local.vlan_pool.use_existing == false ? 1 : 0
 
-  name        = local.vlan_pool.pool_name
+  name        = local.vlan_pool.name
   description = local.vlan_pool.description
   alloc_mode  = local.vlan_pool.alloc_mode # Allocation mode for object vlan_pool. Allowed values: "dynamic", "static"
   annotation  = local.vlan_pool.annotation
