@@ -20,12 +20,13 @@ No modules.
 | Name | Type |
 |------|------|
 | [aci_l3_domain_profile.domain](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/resources/l3_domain_profile) | resource |
+| [aci_vlan_pool.pool](https://registry.terraform.io/providers/CiscoDevNet/aci/latest/docs/data-sources/vlan_pool) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_l3_domain"></a> [l3\_domain](#input\_l3\_domain) | n/a | <pre>object({<br>    name                                = string<br>    annotation                          = optional(string)<br>    name_alias                          = optional(string)<br>    vlan_pool                           = string<br>    # relation_infra_rs_vlan_ns<br>    # relation_infra_rs_vlan_ns_def<br>    # relation_infra_rs_vip_addr_ns<br>    # relation_extnw_rs_out<br>    # relation_infra_rs_dom_vxlan_ns_def<br>  })</pre> | n/a | yes |
+| <a name="input_l3_domain"></a> [l3\_domain](#input\_l3\_domain) | n/a | <pre>object({<br>    name       = string<br>    annotation = optional(string)<br>    name_alias = optional(string)<br>    vlan_pool       = object({<br>      use_existing  = optional(bool)<br>      name          = string<br>      alloc_mode    = optional(string)<br>    })<br>    # relation_infra_rs_vlan_ns<br>    # relation_infra_rs_vlan_ns_def<br>    # relation_infra_rs_vip_addr_ns<br>    # relation_extnw_rs_out<br>    # relation_infra_rs_dom_vxlan_ns_def<br>  })</pre> | n/a | yes |
 | <a name="input_vlan_pool_map"></a> [vlan\_pool\_map](#input\_vlan\_pool\_map) | n/a | `any` | n/a | yes |
 
 ## Outputs

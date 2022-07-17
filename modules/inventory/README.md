@@ -13,7 +13,7 @@ No providers.
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_pod"></a> [pod](#module\_pod) | ./modules/pod | n/a |
+| <a name="module_pod"></a> [pod](#module\_pod) | ./modules/pods | n/a |
 
 ## Resources
 
