@@ -1,6 +1,6 @@
 variable "vsan_pool" {
   type = object({
-    pool_name     = string
+    name          = string
     use_existing  = optional(bool)
     description   = optional(string)
     alloc_mode    = optional(string) # Allocation mode for object vsan_pool. Allowed values: "static"

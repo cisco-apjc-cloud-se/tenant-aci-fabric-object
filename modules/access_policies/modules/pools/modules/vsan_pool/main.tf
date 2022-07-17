@@ -18,14 +18,14 @@ locals {
 data "aci_vsan_pool" "pool" {
   count = local.vsan_pool.use_existing == true ? 1 : 0
 
-  name        = local.vsan_pool.pool_name
+  name        = local.vsan_pool.name
   alloc_mode  = local.vsan_pool.alloc_mode
 }
 
 resource "aci_vsan_pool" "pool" {
   count   = local.vsan_pool.use_existing == false ? 1 : 0
 
-  name        = local.vsan_pool.pool_name
+  name        = local.vsan_pool.name
   description = local.vsan_pool.description
   alloc_mode  = local.vsan_pool.alloc_mode
   annotation  = local.vsan_pool.annotation
