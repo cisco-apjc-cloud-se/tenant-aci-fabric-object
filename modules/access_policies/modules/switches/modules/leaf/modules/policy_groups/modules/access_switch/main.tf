@@ -8,11 +8,25 @@ terraform {
   experiments = [module_variable_optional_attrs]
 }
 
+locals {
+  access_switch = defaults(var.access_switch, {
+    use_existing = false
+  })
+}
+
+### Optionally load existing policy group ###
+data "aci_access_switch_policy_group" "group" {
+  count = local.access_switch.use_existing == true ? 1 : 0
+  name = local.access_switch.name
+}
+
+### Optionally build new policy group ###
 resource "aci_access_switch_policy_group" "group" {
-  name        = var.access_switch.name
-  annotation  = var.access_switch.annotation
-  description = var.access_switch.description
-  name_alias  = var.access_switch.name_alias
+  count = local.access_switch.use_existing == false ? 1 : 0
+  name        = local.access_switch.name
+  annotation  = local.access_switch.annotation
+  description = local.access_switch.description
+  name_alias  = local.access_switch.name_alias
 
   # relation_infra_rs_bfd_ipv4_inst_pol - (Optional) Represents the relation to a BFD Ipv4 Instance Policy (class bfdIpv4InstPol). Relationship to BFD Ipv4 Instance Policy Type: String.
   # relation_infra_rs_bfd_ipv6_inst_pol - (Optional) Represents the relation to a BFD Ipv6 Instance Policy (class bfdIpv6InstPol). Relationship to BFD Ipv6 Instance Policy Type: String.

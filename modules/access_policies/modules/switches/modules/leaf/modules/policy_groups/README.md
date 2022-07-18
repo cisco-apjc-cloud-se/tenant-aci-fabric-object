@@ -23,7 +23,7 @@ No resources.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_policy_groups"></a> [policy\_groups](#input\_policy\_groups) | n/a | <pre>object({<br>    access_switches = map(object({<br>      name        = string # (Required) Name of object Access Switch Policy Group.<br>      annotation  = optional(string) # (Optional) Annotation of object Access Switch Policy Group.<br>      name_alias  = optional(string) # (Optional) Name alias for object Access Switch Policy Group.<br>      description = optional(string) # (Optional) Description for object Access Switch Policy Group.<br>    }))<br>  })</pre> | n/a | yes |
+| <a name="input_policy_groups"></a> [policy\_groups](#input\_policy\_groups) | n/a | <pre>object({<br>    access_switches = map(object({<br>      name          = string # (Required) Name of object Access Switch Policy Group.<br>      use_existing  = optional(bool)<br>      annotation    = optional(string) # (Optional) Annotation of object Access Switch Policy Group.<br>      name_alias    = optional(string) # (Optional) Name alias for object Access Switch Policy Group.<br>      description   = optional(string) # (Optional) Description for object Access Switch Policy Group.<br>    }))<br>  })</pre> | n/a | yes |
 | <a name="input_switch_policy_map"></a> [switch\_policy\_map](#input\_switch\_policy\_map) | n/a | `any` | n/a | yes |
 
 ## Outputs

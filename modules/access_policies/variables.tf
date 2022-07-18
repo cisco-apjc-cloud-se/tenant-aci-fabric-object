@@ -447,10 +447,11 @@ variable "access_policies" {
       leaf = object({
         policy_groups = object({
           access_switches = map(object({
-            name        = string # (Required) Name of object Access Switch Policy Group.
-            annotation  = optional(string) # (Optional) Annotation of object Access Switch Policy Group.
-            name_alias  = optional(string) # (Optional) Name alias for object Access Switch Policy Group.
-            description = optional(string) # (Optional) Description for object Access Switch Policy Group.
+            name          = string # (Required) Name of object Access Switch Policy Group.
+            use_existing  = optional(bool)
+            annotation    = optional(string) # (Optional) Annotation of object Access Switch Policy Group.
+            name_alias    = optional(string) # (Optional) Name alias for object Access Switch Policy Group.
+            description   = optional(string) # (Optional) Description for object Access Switch Policy Group.
           }))
         })
         profiles = object({
@@ -466,7 +467,10 @@ variable "access_policies" {
               annotation              = optional(string) # (Optional) Annotation for object switch association.
               description             = optional(string) # (Optional) Description for object switch association.
               name_alias              = optional(string) # (Optional) Name alias for object switch association.
-              policy_group_name       = optional(string)
+              policy_group            = object({
+                use_existing  = optional(bool)
+                name          = optional(string)
+                })
               node_blocks = map(object({
                 name        = string # (Required) Name of Object node block.
                 annotation  = optional(string) # (Optional) Annotation for object node block.

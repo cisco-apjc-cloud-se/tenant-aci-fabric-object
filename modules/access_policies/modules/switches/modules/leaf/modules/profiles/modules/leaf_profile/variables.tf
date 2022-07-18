@@ -1,17 +1,25 @@
 variable "leaf_profile" {
   type = object({
     name                = string # (Required) Name of Object leaf profile.
+    use_existing        = optional(bool)
     description         = optional(string) # (Optional) Description for object leaf profile.
     annotation          = optional(string) # (Optional) Annotation for object leaf profile.
     name_alias          = optional(string) # (Optional) Name alias for object leaf profile.
-    interface_profiles  = list(string)
+    interface_profiles  = map(object({
+      use_existing  = optional(bool)
+      name          = optional(string)
+      type          = optional(string) # "leaf_interface_profile", "fex_profile"
+    }))
     leaf_selectors  = map(object({
       name                    = string # (Required) Name of Object switch association.
       switch_association_type = string # (Required) The leaf selector type. Allowed values: "ALL", "range", "ALL_IN_POD".
       annotation              = optional(string) # (Optional) Annotation for object switch association.
       description             = optional(string) # (Optional) Description for object switch association.
       name_alias              = optional(string) # (Optional) Name alias for object switch association.
-      policy_group_name       = optional(string)
+      policy_group            = object({
+        use_existing  = optional(bool)
+        name          = optional(string)
+        })
       node_blocks = map(object({
         name        = string # (Required) Name of Object node block.
         annotation  = optional(string) # (Optional) Annotation for object node block.
