@@ -13,7 +13,7 @@ locals {
   vlan_pool_map = {
     for k,p in var.pools.vlan_pools :
       k => {
-        name = p.pool_name
+        name = p.name
         id = module.vlan_pool[k].pool_id
       }
   }
@@ -22,7 +22,7 @@ locals {
   vsan_pool_map = {
     for k,p in var.pools.vsan_pools :
       k => {
-        name = p.pool_name
+        name = p.name
         id = module.vsan_pool[k].pool_id
       }
   }
