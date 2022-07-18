@@ -26,7 +26,9 @@ data "aci_spine_port_policy_group" "group" {
 ### Optionally load existing port selector ###
 data "aci_spine_access_port_selector" "selector" {
   count = local.port_selector.use_existing == true ? 1 : 0
+  spine_interface_profile_dn        = var.spine_interface_profile_dn
   name = local.port_selector.name
+  spine_access_port_selector_type = "range"
 }
 
 resource "aci_spine_access_port_selector" "selector" {
@@ -48,6 +50,6 @@ module "port_block" {
   source    = "./modules/port_block"
 
   ### VARIABLES ###
-  access_port_selector_dn = aci_spine_access_port_selector.selector.id
+  access_port_selector_dn = local.port_selector.policy_group.use_existing == true ? data.aci_spine_access_port_selector.selector[0].id : aci_spine_access_port_selector.selector[0].id
   port_block              = each.value
 }

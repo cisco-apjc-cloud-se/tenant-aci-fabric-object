@@ -20,7 +20,9 @@ locals {
 ### Optionally load existing selector ###
 data "aci_leaf_selector" "selector" {
   count = local.leaf_selector.use_existing == true ? 1 : 0
-  name = local.leaf_selector.name
+  leaf_profile_dn         = var.leaf_profile_dn
+  name                    = local.leaf_selector.name
+  switch_association_type = "range"
 }
 
 ### Optionally build new selector ###

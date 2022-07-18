@@ -17,7 +17,9 @@ locals {
 ### Optionally load existing selector ###
 data "aci_spine_switch_association" "selector" {
   count = local.spine_selector.use_existing == true ? 1 : 0
-  name = local.spine_selector.name
+  spine_profile_dn                = var.spine_profile_dn
+  name                            = local.spine_selector.name
+  spine_switch_association_type   = "range"
 }
 
 ### Optionally build new selector ###

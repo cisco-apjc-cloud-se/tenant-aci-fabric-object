@@ -32,7 +32,9 @@ data "aci_leaf_access_port_policy_group" "group" {
 ### Optionally load existing port selector ###
 data "aci_access_port_selector" "selector" {
   count = local.port_selector.use_existing == true ? 1 : 0
-  name = local.port_selector.name
+  leaf_interface_profile_dn = var.leaf_interface_profile_dn # Required
+  name                      = local.port_selector.name
+  access_port_selector_type = "range"  # Required
 }
 
 ### Optionally build new port selector ###
