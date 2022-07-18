@@ -4,9 +4,18 @@ variable "spine_port" {
     description             = optional(string)
     annotation              = optional(string)
     name_alias              = optional(string)
-    aaep_name               = optional(string)
-    link_level_policy_name  = optional(string)
-    cdp_intf_policy_name    = optional(string)
+    aaep_profile = object({
+      use_existing  = optional(bool)
+      name          = optional(string)
+    })
+    link_level_policy = object({
+      use_existing  = optional(bool)
+      name          = optional(string)
+    })
+    cdp_intf_policy = object({
+      use_existing  = optional(bool)
+      name          = optional(string)
+    })
   })
 }
 

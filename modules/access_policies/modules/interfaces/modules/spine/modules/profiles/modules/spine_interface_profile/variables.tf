@@ -1,16 +1,21 @@
 variable "interface_profile" {
   type = object({
-    name        = string # (Required) Name of Object spine interface profile.
-    description = optional(string) # (Optional) Description for object spine interface profile.
-    annotation  = optional(string) # (Optional) Annotation for object spine interface profile.
-    name_alias  = optional(string) # (Optional) Name alias for object spine interface profile.
+    name          = string # (Required) Name of Object spine interface profile.
+    use_existing  = optional(bool)
+    description   = optional(string) # (Optional) Description for object spine interface profile.
+    annotation    = optional(string) # (Optional) Annotation for object spine interface profile.
+    name_alias    = optional(string) # (Optional) Name alias for object spine interface profile.
     port_selectors = map(object({
       name                            = string # (Required) Name of Object Access Port Selector.
+      use_existing                    = optional(bool)
       spine_access_port_selector_type = optional(string) # (Required) The host port selector type. Allowed values are "ALL" and "range". Default is "ALL".
       annotation                      = optional(string) # (Optional) Annotation for object Access Port Selector.
       description                     = optional(string) # (Optional) Description for object Access Port Selector.
       name_alias                      = optional(string) # (Optional) Name alias for object Access Port Selector.
-      policy_group_name               = optional(string) # Interface Policy Group Name
+      policy_group                    = object({
+        use_existing  = optional(bool)
+        name          = optional(string) # Interface Policy Group Name
+      })
       port_blocks = map(object({
         name        = string # (Optional) name of Object Access Port Block.
         annotation  = optional(string) # (Optional) Annotation for object Access Port Block.

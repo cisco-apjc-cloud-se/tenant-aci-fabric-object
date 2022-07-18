@@ -169,10 +169,11 @@ variable "fabric" {
           })
           profiles = object({
             fex_profiles = map(object({
-              name        = string # (Required) The FEX profile name.
-              annotation  = optional(string) # (Optional) Specifies the annotation of the FEX profile name.
-              description = optional(string) # (Optional) Specifies the description of the FEX profile name.
-              name_alias  = optional(string) # (Optional) Specifies the alias name of the FEX profile name.
+              name          = string # (Required) The FEX profile name.
+              use_existing  = optional(bool)
+              annotation    = optional(string) # (Optional) Specifies the annotation of the FEX profile name.
+              description   = optional(string) # (Optional) Specifies the description of the FEX profile name.
+              name_alias    = optional(string) # (Optional) Specifies the alias name of the FEX profile name.
               port_selectors = map(object({
                 name                      = string # (Required) Name of Object Access Port Selector.
                 use_existing              = optional(bool)
@@ -210,10 +211,11 @@ variable "fabric" {
               }))
             }))
             interface_profiles = map(object({
-              name        = string # (Required) Name of Object leaf interface profile.
-              description = optional(string) # (Optional) Description for object leaf interface profile.
-              annotation  = optional(string) # (Optional) Annotation for object leaf interface profile.
-              name_alias  = optional(string) # (Optional) Name alias for object leaf interface profile.
+              name          = string # (Required) Name of Object leaf interface profile.
+              use_existing  = optional(bool)
+              description   = optional(string) # (Optional) Description for object leaf interface profile.
+              annotation    = optional(string) # (Optional) Annotation for object leaf interface profile.
+              name_alias    = optional(string) # (Optional) Name alias for object leaf interface profile.
               port_selectors = map(object({
                 name                      = string # (Required) Name of Object Access Port Selector.
                 use_existing              = optional(bool)
@@ -259,19 +261,30 @@ variable "fabric" {
               description             = optional(string)
               annotation              = optional(string)
               name_alias              = optional(string)
-              aaep_name               = optional(string)
-              link_level_policy_name  = optional(string)
-              cdp_intf_policy_name    = optional(string)
+              aaep_profile = object({
+                use_existing  = optional(bool)
+                name          = optional(string)
+              })
+              link_level_policy = object({
+                use_existing  = optional(bool)
+                name          = optional(string)
+              })
+              cdp_intf_policy = object({
+                use_existing  = optional(bool)
+                name          = optional(string)
+              })
             }))
           })
           profiles = object({
             interface_profiles = map(object({
-              name        = string # (Required) Name of Object spine interface profile.
-              description = optional(string) # (Optional) Description for object spine interface profile.
-              annotation  = optional(string) # (Optional) Annotation for object spine interface profile.
-              name_alias  = optional(string) # (Optional) Name alias for object spine interface profile.
+              name          = string # (Required) Name of Object spine interface profile.
+              use_existing  = optional(bool)
+              description   = optional(string) # (Optional) Description for object spine interface profile.
+              annotation    = optional(string) # (Optional) Annotation for object spine interface profile.
+              name_alias    = optional(string) # (Optional) Name alias for object spine interface profile.
               port_selectors = map(object({
                 name                            = string # (Required) Name of Object Access Port Selector.
+                use_existing                    = optional(bool)
                 spine_access_port_selector_type = optional(string) # (Required) The host port selector type. Allowed values are "ALL" and "range". Default is "ALL".
                 annotation                      = optional(string) # (Optional) Annotation for object Access Port Selector.
                 description                     = optional(string) # (Optional) Description for object Access Port Selector.
