@@ -11,6 +11,9 @@ terraform {
 locals {
   leaf_profile = defaults(var.leaf_profile, {
     use_existing = false
+    interface_profiles = {
+      use_existing = false
+    }
   })
   existing_leaf_interface_profiles = {
     for k,p in local.leaf_profile.interface_profiles :

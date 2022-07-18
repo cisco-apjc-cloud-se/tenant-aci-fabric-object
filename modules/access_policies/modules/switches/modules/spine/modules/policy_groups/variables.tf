@@ -5,8 +5,14 @@ variable "policy_groups" {
       annotation            = optional(string) # (Optional) Annotation of object Spine Switch Policy Group.
       name_alias            = optional(string) # (Optional) Name alias for object Spine Switch Policy Group.
       description           = optional(string) # (Optional) Description for object Spine Switch Policy Group.
-      lldp_intf_policy_name = optional(string)
-      cdp_intf_policy_name  = optional(string)
+      lldp_intf_policy = object({
+        use_existing  = optional(bool)
+        name          = optional(string)
+      })
+      cdp_intf_policy = object({
+        use_existing  = optional(bool)
+        name          = optional(string)
+      })
     }))
   })
 }

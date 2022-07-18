@@ -1,6 +1,7 @@
 variable "leaf_selector" {
   type = object({
     name                    = string # (Required) Name of Object switch association.
+    use_existing            = optional(bool)
     switch_association_type = string # (Required) The leaf selector type. Allowed values: "ALL", "range", "ALL_IN_POD".
     annotation              = optional(string) # (Optional) Annotation for object switch association.
     description             = optional(string) # (Optional) Description for object switch association.

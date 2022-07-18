@@ -12,12 +12,13 @@ variable "leaf" {
     profiles = object({
       leaf_profiles = map(object({
         name                = string # (Required) Name of Object leaf profile.
+        use_existing        = optional(bool)
         description         = optional(string) # (Optional) Description for object leaf profile.
         annotation          = optional(string) # (Optional) Annotation for object leaf profile.
         name_alias          = optional(string) # (Optional) Name alias for object leaf profile.
-        interface_profiles  = list(string)
         leaf_selectors  = map(object({
           name                    = string # (Required) Name of Object switch association.
+          use_existing            = optional(bool)
           switch_association_type = string # (Required) The leaf selector type. Allowed values: "ALL", "range", "ALL_IN_POD".
           annotation              = optional(string) # (Optional) Annotation for object switch association.
           description             = optional(string) # (Optional) Description for object switch association.
@@ -34,6 +35,11 @@ variable "leaf" {
             name_alias  = optional(string) # (Optional) Name alias for object node block.
             to_node     = number # (Optional) To node ID. Range from 1 to 16000. Default value is "1".
           }))
+        }))
+        interface_profiles  = map(object({
+          use_existing  = optional(bool)
+          name          = optional(string)
+          type          = optional(string) # "leaf_interface_profile", "fex_profile"
         }))
       }))
     })
