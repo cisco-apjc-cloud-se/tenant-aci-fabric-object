@@ -52,7 +52,7 @@ resource "aci_attachable_access_entity_profile" "aaep" {
 ### Optionaly set Infra VLAN ###
 resource "aci_vlan_encapsulationfor_vxlan_traffic" "infra" {
   count = local.aaep.use_existing == false ? (local.aaep.enable_infra_vlan == true ? 1 : 0) : 0
-  attachable_access_entity_profile_dn  = aci_attachable_access_entity_profile.aaep.id
+  attachable_access_entity_profile_dn  = aci_attachable_access_entity_profile.aaep[0].id
 }
 
 ### Optionaly load existing domains ###
@@ -75,5 +75,5 @@ data "aci_fc_domain" "domain" {
 resource "aci_aaep_to_domain" "domain" {
   for_each = local.aaep.associated_domains
   attachable_access_entity_profile_dn = local.aaep.use_existing == true ? data.aci_attachable_access_entity_profile.aaep[0].id : aci_attachable_access_entity_profile.aaep[0].id
-  domain_dn                           = each.value.use_existing == false ? var.domain_map[each.value.name].id : each.value.type == "physical" ? data.aci_physical_domain.domain[each.value.name].id : each.value.type == "layer3" ? data.aci_l3_domain_profile.domain[each.value.name].id : each.value.type == "fc" ? data.aci_fc_profile.domain[each.value.name].id : null
+  domain_dn                           = each.value.use_existing == false ? var.domain_map[each.value.name].id : each.value.type == "physical" ? data.aci_physical_domain.domain[each.value.name].id : each.value.type == "layer3" ? data.aci_l3_domain_profile.domain[each.value.name].id : each.value.type == "fc" ? data.aci_fc_domain.domain[each.value.name].id : null
 }
