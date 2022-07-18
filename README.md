@@ -10,7 +10,7 @@ Terraform module to build and manage ACI Fabric policies (i.e. Fabric tab in the
  - Use new selector with existing profile (?)
  - Use existing interface profiles in list for new leaf profile (?)
  - Use existing domain in domain list for new AAEP
-- pool_name to name
+<!-- - pool_name to name -->
 - Global Error & MCP Instance Policies
 
 
