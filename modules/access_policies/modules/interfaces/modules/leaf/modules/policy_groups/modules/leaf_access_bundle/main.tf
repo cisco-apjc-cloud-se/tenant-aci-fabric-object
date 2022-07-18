@@ -10,42 +10,130 @@ terraform {
 
 # NOTE: Both PC and vPC Interface Bundles
 
+locals {
+  leaf_access_bundle = defaults(var.leaf_access_bundle, {
+    aaep_profile = {
+      use_existing = false
+    }
+    link_level_policy = {
+      use_existing = false
+    }
+    lldp_intf_policy = {
+      use_existing = false
+    }
+    cdp_intf_policy = {
+      use_existing = false
+    }
+    mcp_intf_policy = {
+      use_existing = false
+    }
+    l2_intf_policy = {
+      use_existing = false
+    }
+    fc_intf_policy = {
+      use_existing = false
+    }
+    stp_intf_policy = {
+      use_existing = false
+    }
+    port_sec_policy = {
+      use_existing = false
+    }
+    pc_intf_policy = {
+      use_existing = false
+    }
+  })
+}
+
+### Optionally load existing policies ###
+data "aci_attachable_access_entity_profile" "aaep" {
+  count = local.leaf_access_bundle.aaep_profile.use_existing == true ? 1 : 0
+  name = local.leaf_access_bundle.aaep_profile.name
+}
+
+data "aci_fabric_if_pol" "link" {
+  count = local.leaf_access_bundle.link_level_policy.use_existing == true ? 1 : 0
+  name = local.leaf_access_bundle.link_level_policy.name
+}
+
+data "aci_lldp_interface_policy" "lldp" {
+  count = local.leaf_access_bundle.lldp_intf_policy.use_existing == true ? 1 : 0
+  name = local.leaf_access_bundle.lldp_intf_policy.name
+}
+
+data "aci_cdp_interface_policy" "cdp" {
+  count = local.leaf_access_bundle.cdp_intf_policy.use_existing == true ? 1 : 0
+  name = local.leaf_access_bundle.cdp_intf_policy.name
+}
+
+data "aci_miscabling_protocol_interface_policy" "mcp" {
+  count = local.leaf_access_bundle.mcp_intf_policy.use_existing == true ? 1 : 0
+  name = local.leaf_access_bundle.mcp_intf_policy.name
+}
+
+data "aci_l2_interface_policy" "l2" {
+  count = local.leaf_access_bundle.l2_intf_policy.use_existing == true ? 1 : 0
+  name = local.leaf_access_bundle.l2_intf_policy.name
+}
+
+data "aci_interface_fc_policy" "fc" {
+  count = local.leaf_access_bundle.fc_intf_policy.use_existing == true ? 1 : 0
+  name = local.leaf_access_bundle.fc_intf_policy.name
+}
+
+data "aci_spanning_tree_interface_policy" "stp" {
+  count = local.leaf_access_bundle.stp_intf_policy.use_existing == true ? 1 : 0
+  name = local.leaf_access_bundle.stp_intf_policy.name
+}
+
+data "aci_port_security_policy" "portsec" {
+  count = local.leaf_access_bundle.port_sec_policy.use_existing == true ? 1 : 0
+  name = local.leaf_access_bundle.port_sec_policy.name
+}
+
+data "aci_lacp_policy" "pc" {
+  count = local.leaf_access_bundle.pc_intf_policy.use_existing == true ? 1 : 0
+  name = local.leaf_access_bundle.pc_intf_policy.name
+}
+
+
+### Build new Leaf Access Bundle Policy Group ###
 resource "aci_leaf_access_bundle_policy_group" "group" {
-  name          = var.leaf_access_bundle.name
-  annotation    = var.leaf_access_bundle.annotation
-  description   = var.leaf_access_bundle.description
-  lag_t         = var.leaf_access_bundle.lag_t
-  name_alias    = var.leaf_access_bundle.name_alias
+  name          = local.leaf_access_bundle.name
+  annotation    = local.leaf_access_bundle.annotation
+  description   = local.leaf_access_bundle.description
+  lag_t         = local.leaf_access_bundle.lag_t
+  name_alias    = local.leaf_access_bundle.name_alias
 
   ### Attached Entity Profile ###
-  relation_infra_rs_att_ent_p             = var.leaf_access_bundle.aaep_name != null ? var.aaep_map[var.leaf_access_bundle.aaep_name].id : null
+  relation_infra_rs_att_ent_p             = local.leaf_access_bundle.aaep_profile.name != null ? local.leaf_access_bundle.aaep_profile.use_existing == true ? data.aci_attachable_access_entity_profile.aaep[0].id : var.aaep_map[local.leaf_access_bundle.aaep_profile.name].id : null
 
   ### Link Level Policy ###
-  relation_infra_rs_h_if_pol              = var.leaf_access_bundle.link_level_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.link_level_policy_name].id : null
+  relation_infra_rs_h_if_pol              = local.leaf_access_bundle.link_level_policy.name != null ? local.leaf_access_bundle.link_level_policy.use_existing == true ? data.aci_fabric_if_pol.link[0].id : var.interface_policy_map[local.leaf_access_bundle.link_level_policy.name].id : null
 
   ### LLDP Interface Policy ###
-  relation_infra_rs_lldp_if_pol           = var.leaf_access_bundle.lldp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.lldp_intf_policy_name].id : null
+  relation_infra_rs_lldp_if_pol           = local.leaf_access_bundle.lldp_intf_policy.name != null ? local.leaf_access_bundle.lldp_intf_policy.use_existing == true ? data.aci_lldp_interface_policy.lldp[0].id : var.interface_policy_map[local.leaf_access_bundle.lldp_intf_policy.name].id : null
 
   ### CDP Interface Policy ###
-  relation_infra_rs_cdp_if_pol            = var.leaf_access_bundle.cdp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.cdp_intf_policy_name].id : null
+  relation_infra_rs_cdp_if_pol            = local.leaf_access_bundle.cdp_intf_policy.name != null ? local.leaf_access_bundle.cdp_intf_policy.use_existing == true ? data.aci_cdp_interface_policy.cdp[0].id : var.interface_policy_map[local.leaf_access_bundle.cdp_intf_policy.name].id : null
 
   ### MCP Interface Policy ###
-  relation_infra_rs_mcp_if_pol            = var.leaf_access_bundle.mcp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.mcp_intf_policy_name].id : null
+  relation_infra_rs_mcp_if_pol            = local.leaf_access_bundle.mcp_intf_policy.name != null ? local.leaf_access_bundle.mcp_intf_policy.use_existing == true ? data.aci_miscabling_protocol_interface_policy.mcp[0].id : var.interface_policy_map[local.leaf_access_bundle.mcp_intf_policy.name].id : null
 
   ### L2 Interface Policy ###
-  relation_infra_rs_l2_if_pol             = var.leaf_access_bundle.l2_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.l2_intf_policy_name].id : null
+  relation_infra_rs_l2_if_pol             = local.leaf_access_bundle.l2_intf_policy.name != null ? local.leaf_access_bundle.l2_intf_policy.use_existing == true ? data.aci_l2_interface_policy.l2[0].id : var.interface_policy_map[local.leaf_access_bundle.l2_intf_policy.name].id : null
 
   ### FC Interface Policy ###
-  relation_infra_rs_fc_if_pol             = var.leaf_access_bundle.fc_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.fc_intf_policy_name].id : null
+  relation_infra_rs_fc_if_pol             = local.leaf_access_bundle.fc_intf_policy.name != null ? local.leaf_access_bundle.fc_intf_policy.use_existing == true ? data.aci_interface_fc_policy.fc[0].id : var.interface_policy_map[local.leaf_access_bundle.fc_intf_policy.name].id : null
 
   ### STP Interface Policy ###
-  relation_infra_rs_stp_if_pol            = var.leaf_access_bundle.stp_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.stp_intf_policy_name].id : null
+  relation_infra_rs_stp_if_pol            = local.leaf_access_bundle.stp_intf_policy.name != null ? local.leaf_access_bundle.stp_intf_policy.use_existing == true ? data.aci_spanning_tree_interface_policy.stp[0].id : var.interface_policy_map[local.leaf_access_bundle.stp_intf_policy.name].id : null
 
   ### Port Security Policy ###
-  relation_infra_rs_l2_port_security_pol  = var.leaf_access_bundle.port_sec_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.port_sec_policy_name].id : null
+  relation_infra_rs_l2_port_security_pol  = local.leaf_access_bundle.port_sec_policy.name != null ? local.leaf_access_bundle.port_sec_policy.use_existing == true ? data.aci_port_security_policy.portsec[0].id : var.interface_policy_map[local.leaf_access_bundle.port_sec_policy.name].id : null
 
   ### LACP Interface Policy ###
-  relation_infra_rs_lacp_pol              = var.leaf_access_bundle.pc_intf_policy_name != null ? var.interface_policy_map[var.leaf_access_bundle.pc_intf_policy_name].id : null
+  relation_infra_rs_lacp_pol              = local.leaf_access_bundle.pc_intf_policy.name != null ? local.leaf_access_bundle.pc_intf_policy.use_existing == true ? data.aci_lacp_policy.pc[0].id : var.interface_policy_map[local.leaf_access_bundle.pc_intf_policy.name].id : null
 
 #   relation_infra_rs_span_v_src_grp - (Optional) Relation to class spanVSrcGrp. Cardinality - N_TO_M. Type - Set of String.
 #   relation_infra_rs_stormctrl_if_pol - (Optional) Relation to class stormctrlIfPol. Cardinality - N_TO_ONE. Type - String.

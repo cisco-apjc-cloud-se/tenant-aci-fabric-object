@@ -13,6 +13,6 @@ resource "aci_vpc_explicit_protection_group" "group" {
   annotation                        = var.vpc_protection_group.annotation
   switch1                           = var.vpc_protection_group.switch1
   switch2                           = var.vpc_protection_group.switch2
-  vpc_domain_policy                 = var.vpc_protection_group.vpc_domain_policy
+  vpc_domain_policy                 = var.vpc_protection_group.vpc_domain_policy  ## Uses name so doesn't matter if existing or otherwise?
   vpc_explicit_protection_group_id  = var.vpc_protection_group.vpc_explicit_protection_group_id
 }
