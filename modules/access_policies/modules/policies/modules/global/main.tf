@@ -48,3 +48,21 @@ module "qos_class" {
   ### VARIABLES ###
   qos_class   = var.global.qos_class
 }
+
+### ACI Fabric Access Policy - Global Policy - Error Disable Recovery ###
+module "error_disable_recovery" {
+  count = var.global.error_disable_recovery != null ? 1 : 0
+  source = "./modules/error_disable_recovery"
+
+  ### VARIABLES ###
+  error_disable_recovery   = var.global.error_disable_recovery
+}
+
+### ACI Fabric Access Policy - Global Policy - MCP Instance Policy ###
+module "mcp_instance" {
+  count = var.global.mcp_instance != null ? 1 : 0
+  source = "./modules/mcp_instance"
+
+  ### VARIABLES ###
+  mcp_instance   = var.global.mcp_instance
+}
