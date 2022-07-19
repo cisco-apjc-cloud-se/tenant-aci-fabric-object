@@ -13,7 +13,17 @@ module "leaf_switches" {
   for_each = var.pod.leaf_switches
   source = "./modules/leaf_switches"
 
-  ### Variables ###
+  ### VARIABLES ###
   leaf    = each.value
   pod_id  = var.pod.pod_id
+}
+
+### ACI Fabric - Inventory - Pod - Fabric Membership ###
+module "fabric_member" {
+  for_each = var.pod.fabric_members
+  source = "./modules/fabric_member"
+
+  ### VARIABLES ###
+  fabric_member = each.value
+  pod_id        = var.pod.pod_id
 }
