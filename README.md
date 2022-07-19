@@ -1,9 +1,79 @@
 # terraform-aci-fabric-object
-Terraform module to build and manage ACI Fabric policies (i.e. Fabric tab in the APIC GUI) in entirety from a single HCL/JSON/YAML object variable file.
+Terraform module to build and manage ACI Fabric policies (i.e. Fabric tab in the APIC GUI) in entirety from a single HCL/JSON/YAML object variable file.  This should simplify fabric configuration and allow for easier configuration changes and rollbacks.  
 
-## TO DO:
-- Global Error & MCP Instance Policies
+Please also see the related module [terraform-aci-tenant-object](https://github.com/cisco-apjc-cloud-se/terraform-aci-tenant-object) for building and managing logical ACI Tenant configuration (in entirety) from a single HCL/JSON/YAML object variable file.
 
+This module also supports re-using existing configuration through an optional `use_existing` parameter at most levels.  This allows Terraform to manage child objects without fully managing the parent object (i.e. Terraform can add new interface profiles to an existing switch profile without disturbing existing configuration).  
+
+Please see this link for examples of how this module is used.
+[ACI Fabric Management Example](https://github.com/cisco-apjc-cloud-se/aci-fabric-example)
+
+The input variable object for this module is structured on the ACI Fabric tab (ACI 5.2+).  The following configuration items are supported.
+
+- Inventory
+  - Pod
+    - Fabric Membership
+    - Leaf
+      - Interface Blacklist
+- Fabric Policies
+  - Interface
+    - Layer 3 Interface Policies
+  - Monitoring
+    - Fabric Node Control Policies
+- Access Policies
+  - Domains
+    - Physical Domains
+    - Layer 3 Domains
+    - Fibre Channel Domains
+  - Interfaces
+    - Leaf
+      - Policy Groups
+        - Leaf Access Bundles (PC/vPC Interfaces)
+        - Leaf Access Ports (Eth Interfaces)
+        - Leaf Breakout Ports
+      - Profiles
+        - FEX Profiles
+        - Leaf Interface Profiles
+    - Spine
+      - Policy Groups
+        - Spine Ports
+      - Profiles
+        - Spine Interface Profiles
+  - Policies
+    - Global
+      - Attached Access Entity Profiles (AAEP)
+      - Error Disable Recovery Policy
+      - MCP Instance Policy
+      - QoS Class Policy
+    - Interface
+      - CDP Interface Policies
+      - Fibre Channel Interface Policies
+      - Layer 2 Interface Policies
+      - Link Level Interface Policies
+      - LLDP Interface Policies
+      - MCP Interface Policies
+      - Port Channel (LACP) Policies
+      - Port Security Policies
+      - Spanning Tree Interface Policies
+    - Switch
+      - VPC Domain Policies
+      - VPC Explicit Protection Groups
+  - Pools
+    - VLAN Pools
+    - VSAN Pools
+  - Switches
+    - Leaf
+      - Policy Groups
+        - Access Switch
+      - Profiles
+        - Leaf Profiles
+    - Spine
+      - Policy Groups
+        - Spine Switch
+      - Profiles
+        - Spine Profiles
+
+For any additonal requests, please raise an enhancement request within the GitHub repository.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
